@@ -27,6 +27,7 @@
 		7D6452FF2609E80100C37C56 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6452F92609E80100C37C56 /* User+CoreDataProperties.swift */; };
 		7D6453002609E80100C37C56 /* Project+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6452FA2609E80100C37C56 /* Project+CoreDataClass.swift */; };
 		7D6453012609E80100C37C56 /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6452FB2609E80100C37C56 /* Project+CoreDataProperties.swift */; };
+		7D6453122609F75800C37C56 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6453112609F75800C37C56 /* CurrentUser.swift */; };
 		7D88B23E26095C6C0066E419 /* ContributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D88B23D26095C6C0066E419 /* ContributionView.swift */; };
 		7DDAAF0B26080D7C004AF65F /* CreateProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDAAF0A26080D7C004AF65F /* CreateProjectView.swift */; };
 /* End PBXBuildFile section */
@@ -54,6 +55,7 @@
 		7D6452F92609E80100C37C56 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7D6452FA2609E80100C37C56 /* Project+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7D6452FB2609E80100C37C56 /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7D6453112609F75800C37C56 /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		7D88B23D26095C6C0066E419 /* ContributionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionView.swift; sourceTree = "<group>"; };
 		7DDAAF0A26080D7C004AF65F /* CreateProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,6 +159,7 @@
 		7D5714D126094ACE00F8BB95 /* Users */ = {
 			isa = PBXGroup;
 			children = (
+				7D6453112609F75800C37C56 /* CurrentUser.swift */,
 				7D88B24C260973710066E419 /* views */,
 				7D88B24B2609735B0066E419 /* models */,
 			);
@@ -331,6 +334,7 @@
 				7D297ED52607F3C300FEDACD /* ProjectRow.swift in Sources */,
 				7D6452FE2609E80100C37C56 /* User+CoreDataClass.swift in Sources */,
 				7D297EB62607F19000FEDACD /* ContentView.swift in Sources */,
+				7D6453122609F75800C37C56 /* CurrentUser.swift in Sources */,
 				7D297EB92607F19000FEDACD /* GreenForAllCoreDataUIKit.xcdatamodeld in Sources */,
 				7D6452FD2609E80100C37C56 /* Contribution+CoreDataProperties.swift in Sources */,
 				7D297EDC2607F83200FEDACD /* ProgressBar.swift in Sources */,

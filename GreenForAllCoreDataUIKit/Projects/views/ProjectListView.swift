@@ -49,7 +49,7 @@ struct ProjectListView: View {
                     
                     //Liste des projets
                     projectList
-                    
+                                        
                 }//:VStack
 
             }//:ZStack
@@ -68,9 +68,27 @@ struct ProjectListView: View {
 
 extension ProjectListView {
     
+    func saveFirstUser() {
+        // On crée une nouvelle instance Projet
+        let newUser = User(context: managedObjectContext)
+        
+        newUser.firstname = "Mounir"
+        newUser.lastname = "DJIAR"
+        newUser.email = "mounir@djiar.com"
+        
+        // On save la nouvelle instance dans le MOC
+        do {
+            try managedObjectContext.save()
+        } catch {
+            print(error)
+        }
+    }
+    
     // Bouton Add de la NavBar
     private var addButton : some View {
         Button(action: {
+            //saveFirstUser()
+            
             showAddProjectView = true
             
         }, label: {
@@ -97,6 +115,8 @@ extension ProjectListView {
             }//: ForEach
         }//:ScrollView
     }
+    
+    
 }
 
 struct ProjectListView_Previews: PreviewProvider {

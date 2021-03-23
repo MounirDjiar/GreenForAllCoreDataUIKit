@@ -12,8 +12,8 @@ struct CreateProjectView: View {
     // On récupère le Managed Object Contexte
     @Environment(\.managedObjectContext) var managedObjectContext
     
-    // Je récupère le user
-    @FetchRequest(fetchRequest: User.fetchRequest()) var users:FetchedResults<User>
+    // Je récupère le current user depuis l'environement
+    @EnvironmentObject var currentUser: CurrentUser
 
     @Binding var showCreateProjectView:Bool
     @State var showingAlert = false
@@ -53,9 +53,10 @@ struct CreateProjectView: View {
         //UINavigationBar.appearance().isTranslucent = false
         
         return NavigationView {
+            
             ZStack {
                 Color("bgGreen").ignoresSafeArea()
-                
+    
                 Form {
                     TextField("Titre", text: $title)
                     Section {
@@ -202,18 +203,7 @@ extension CreateProjectView {
         newProject.created_date = Date()
         newProject.finished_date = Date().addingTimeInterval(TimeInterval(86400 * (Int(duree) ?? 0)))
         newProject.category = selectedCategory.rawValue
-        
-        if users.isEmpty {
-            let newUser = User(context: managedObjectContext)
-            newUser.firstname = "Mounir"
-            newUser.lastname = "DJIAR"
-            newUser.email = "mounir@djiar.com"
-            
-        }
-        else {
-            
-        }
-        
+        newProject.user = currentUser.user
         
         // On save la nouvelle instance dans le MOC
         do {
@@ -230,8 +220,12 @@ struct CreateProjetView_Previews: PreviewProvider {
         // On récupère le contexte
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
+        // Instanciation CurrentUser
+        let currentUser = CurrentUser(contexte: context)
+        
         return CreateProjectView(showCreateProjectView: .constant(false))
             .environment(\.managedObjectContext, context)
+            .environmentObject(currentUser)
     }
 }
 
