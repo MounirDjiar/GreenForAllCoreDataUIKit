@@ -5,7 +5,50 @@
 //  Created by Baptiste Moulin on 18/03/2021.
 //
 
+import UIKit
 import SwiftUI
+
+
+struct ImagePicker: UIViewControllerRepresentable {
+    
+    class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+        let parent: ImagePicker
+
+        init(_ parent: ImagePicker) {
+            self.parent = parent
+        }
+        
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+            if let uiImage = info[.originalImage] as? UIImage {
+                parent.image = uiImage
+            }
+
+            parent.presentationMode.wrappedValue.dismiss()
+        }
+    }
+    
+    @Environment(\.presentationMode) var presentationMode
+    @Binding var image: UIImage?
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+    
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.delegate = context.coordinator
+        return picker
+    }
+
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePicker>) {
+
+    }
+}
+
+func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return paths[0]
+}
 
 struct CreateProjectView: View {
     
@@ -18,11 +61,15 @@ struct CreateProjectView: View {
     @Binding var showCreateProjectView:Bool
     @State var showingAlert = false
     
+    @State private var showingImagePicker = false
+    @State private var inputImage: UIImage?
+    @State private var image: Image?
+    
     @State var title: String = ""
     @State var desc: String = ""
     @State var budget: String = ""
     @State var urlvideo: String = ""
-    @State var urlimg: String = ""
+    @State var urlimg: URL? = URL(string: "google.com")
     @State var duree: String = ""
     
     
@@ -137,7 +184,27 @@ struct CreateProjectView: View {
                     }
                     
                     Section {
-                        TextField("URL Image", text: $urlimg)
+                        HStack {
+                            Button (action: {
+                                self.showingImagePicker = true
+                                if let timage = inputImage {
+                                    if let tdata = timage.pngData() {
+                                        urlimg = getDocumentsDirectory().appendingPathComponent("CP-" + title + ".png")
+                                        try? tdata.write(to: urlimg!)
+                                        
+                                    }
+                                }
+                            }, label: {
+                                HStack {
+                                    Text("Selectionnez une image")
+                                    Spacer()
+                                    (image ?? Image(systemName: "person"))
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 40, height: 40)
+                                }
+                            })
+                        }
                     }
                     
                     Section {
@@ -157,6 +224,10 @@ struct CreateProjectView: View {
             )
         }
     }
+    func loadImage() {
+        guard let inputImage = inputImage else { return }
+        image = Image(uiImage: inputImage)
+    }
 }
 
 extension CreateProjectView {
@@ -170,7 +241,7 @@ extension CreateProjectView {
     private var addButton: some View {
         Button("Créer") {
             
-            if title == "" || desc == "" || Int(budget) ?? 0 == 0 || urlimg == "" || Int(duree) ?? 0 == 0 {
+            if title == "" || desc == "" || Int(budget) ?? 0 == 0 || urlimg == nil || Int(duree) ?? 0 == 0 {
                 showingAlert = true
             }
             else {
@@ -198,7 +269,7 @@ extension CreateProjectView {
         newProject.title = title
         newProject.description_project = desc
         newProject.budget = Int64(budget) ?? 0
-        newProject.picture = urlimg
+        newProject.picture = "\(urlimg)"
         newProject.video = urlvideo
         newProject.created_date = Date()
         newProject.finished_date = Date().addingTimeInterval(TimeInterval(86400 * (Int(duree) ?? 0)))
@@ -228,5 +299,6 @@ struct CreateProjetView_Previews: PreviewProvider {
             .environmentObject(currentUser)
     }
 }
+
 
 
