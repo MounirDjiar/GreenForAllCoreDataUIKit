@@ -12,6 +12,9 @@ struct ProjectDetailView: View {
     // On récupère le Managed Object Contexte pour le donner à la sheet
     @Environment(\.managedObjectContext) var managedObjectContext
     
+    // Je récupère le current user depuis l'environement
+    @EnvironmentObject var currentUser: CurrentUser
+    
     let project:Project
     
     @State private var showContributionView:Bool = false
@@ -47,17 +50,15 @@ struct ProjectDetailView: View {
                             .shadow(radius: 10)
                             , alignment: .bottomTrailing
                         )
-                    
                 }
                 
                 HStack {
-                    VStack (alignment: .leading){
+                    VStack (alignment: .leading) {
                         Text("Avancement du projet")
                             .font(.headline)
                             .fontWeight(.bold)
-
                         ProgressBar(
-                            value: getValue(budget: 34, contributions: 12),
+                            value: project.progressContributions,
                             filColor:Color("progressBarColor"),
                             bgColor: Color.white
                         )
@@ -69,13 +70,13 @@ struct ProjectDetailView: View {
                 
                 HStack {
                     VStack {
-                        HStack {
+                        HStack(alignment: .top) {
                             Image(systemName: "person.fill")
                                 .font(.system(size: 25))
-                            Text("\(project.contributions?.count ?? -1)")
+                            Text("\(project.nbContributeurs)")
                                 .fontWeight(.bold)
                                 .font(.system(size: 25))
-                                .padding(.leading, -10.0)
+                                .padding(.leading, -8.0)
                         }
                         Text("Contributeurs")
                             .font(.system(size: 14))
@@ -86,10 +87,10 @@ struct ProjectDetailView: View {
                         HStack {
                             Image(systemName: "clock.arrow.circlepath")
                                 .font(.system(size: 25))
-                            Text("6J")
+                            Text("\(project.nbDaysLeftToProject)")
                                 .fontWeight(.bold)
                                 .font(.system(size: 25))
-                                .padding(.leading, -9.0)
+                                .padding(.leading, -8.0)
                         }
                         Text("Jours restants")
                             .font(.system(size: 14))
@@ -119,25 +120,28 @@ struct ProjectDetailView: View {
                         .foregroundColor(Color.white)
                         .multilineTextAlignment(.leading)
                         .lineLimit(10)
-                }
-                
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        contribute()
-                    }, label: {
-                        Text("Contribuer")
-                            .font(.system(size: 25))
-                            .frame(width: 200)
-                            .padding(8.0)
-                            .background(Color("progressBarColor"))
-                            .cornerRadius(8)
-                    })
                     
-                    Spacer()
                 }
-                .padding(.vertical)
                 
+                if (canContribute()) {
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            contribute()
+                        }, label: {
+                            Text("Contribuer")
+                                .font(.system(size: 25))
+                                .frame(width: 200)
+                                .padding(8.0)
+                                .background(Color("progressBarColor"))
+                                .cornerRadius(8)
+                        })
+                        
+                        Spacer()
+                    }
+                    .padding(.vertical)
+                }
+                                
                 Spacer()
                 
             }//:VStack
@@ -155,16 +159,14 @@ struct ProjectDetailView: View {
     }
 }
 
-
-extension ProjectDetailView {
-    private func getValue(budget: Int, contributions: Int) ->  Float {
-        return 0.4
-    }
-}
-
 extension ProjectDetailView {
     private func contribute() {
         showContributionView = true
+    }
+    
+    private func canContribute() -> Bool {
+        //(currentUser.user == project.user)
+        return true
     }
 }
 
@@ -173,6 +175,9 @@ struct ProjectDetailView_Previews: PreviewProvider {
         
         // On récupère le contexte
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        // Instanciation CurrentUser
+        let currentUser = CurrentUser(context: context)
         
         // On crée une instance de Project
         let project1 = Project(context: context)
@@ -185,15 +190,30 @@ struct ProjectDetailView_Previews: PreviewProvider {
         project1.budget = 12000
         project1.picture = "Icon_project2"
         project1.category = CategoryProject.energie.rawValue
-        
-        let user1 = User(context: context)
+        project1.created_date = Date()
+        project1.finished_date = Date().addingTimeInterval(TimeInterval(86400 * 6)) // Exemple 6J
+
         
         // Le user créateur du projet
-        user1.firstname = "Mounir"
+        let user1 = User(context: context)
+        user1.firstname = "Djallal"
         user1.lastname = "DJIAR"
-    
         project1.user = user1
         
+        // Je crée une contribution
+        let contribution1 = Contribution(context: context)
+        contribution1.amount = 1000
+        
+        // Je crée une contribution
+        let contribution2 = Contribution(context: context)
+        contribution2.amount = 2000
+        
+        project1.addToContributions(contribution1)
+        project1.addToContributions(contribution2)
+
+        
         return ProjectDetailView(project: project1)
+            .environment(\.managedObjectContext, context)
+            .environmentObject(currentUser)
     }
 }

@@ -294,7 +294,7 @@ struct CreateProjetView_Previews: PreviewProvider {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
         // Instanciation CurrentUser
-        let currentUser = CurrentUser(contexte: context)
+        let currentUser = CurrentUser(context: context)
         
         return CreateProjectView(showCreateProjectView: .constant(false))
             .environment(\.managedObjectContext, context)

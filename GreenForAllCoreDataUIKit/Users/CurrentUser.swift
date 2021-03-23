@@ -13,10 +13,10 @@ class CurrentUser: ObservableObject {
     
     @Published var user:User?
     
-    var contexte: NSManagedObjectContext
+    var context: NSManagedObjectContext
     
-    init(contexte: NSManagedObjectContext) {
-        self.contexte = contexte
+    init(context: NSManagedObjectContext) {
+        self.context = context
         getUser ()
     }
     
@@ -25,9 +25,8 @@ class CurrentUser: ObservableObject {
         let request = NSFetchRequest<User>(entityName: "User")
         request.fetchLimit = 1
         
-        if let result = try? contexte.fetch(request) {
+        if let result = try? context.fetch(request) {
             user = (result as [User]).first
-            print(user?.firstname)
         }
     }
 }

@@ -22,7 +22,7 @@ extension Project {
     @NSManaged public var category: Int64
     @NSManaged public var created_date: Date?
     @NSManaged public var description_project: String
-    @NSManaged public var finished_date: Date?
+    @NSManaged public var finished_date: Date
     @NSManaged public var picture: String
     @NSManaged public var title: String
     @NSManaged public var video: String?
@@ -46,6 +46,29 @@ extension Project {
     @objc(removeContributions:)
     @NSManaged public func removeFromContributions(_ values: NSSet)
 
+}
+
+extension Project {
+    
+    // Jour restants au projets
+    var nbDaysLeftToProject :  Int {
+        Int(Date().distance(to: self.finished_date) / 86400)
+    }
+    
+    // Nombre de contributeurs
+    var nbContributeurs : Int {
+        self.contributions?.count ?? 0
+    }
+    
+    // Montant total des contributions à ce projet
+    var totalContributions : Int {
+        2000
+    }
+    
+    // Progression contribution par rapport au budget
+    var progressContributions : Float {
+        Float(self.totalContributions) / Float(self.budget)
+    }
 }
 
 extension Project : Identifiable {
