@@ -12,6 +12,9 @@ struct CreateProjectView: View {
     // On récupère le Managed Object Contexte
     @Environment(\.managedObjectContext) var managedObjectContext
     
+    // Je récupère le user
+    @FetchRequest(fetchRequest: User.fetchRequest()) var users:FetchedResults<User>
+
     @Binding var showCreateProjectView:Bool
     @State var showingAlert = false
     
@@ -23,7 +26,7 @@ struct CreateProjectView: View {
     @State var duree: String = ""
     
     
-    @State private var selectedCategory = CategoryProject.none
+    @State private var selectedCategory = CategoryProject.energie
     
     var body: some View {
         
@@ -68,41 +71,38 @@ struct CreateProjectView: View {
                                     ForEach (CategoryProject.allCases, id: \.self) { categoryProject in
                                         Button(action: {
                                             if (selectedCategory == categoryProject){
-                                                selectedCategory = CategoryProject.none
+                                                //selectedCategory = CategoryProject.none
                                             }
                                             else{
                                                 selectedCategory = categoryProject
                                             }
                                         }, label: {
-                                            if categoryProject != CategoryProject.none {
-                                                if (selectedCategory == categoryProject)
-                                                {
-                                                    Image("\(categoryProject.categoryProjectImage)")
-                                                        .resizable()
-                                                        .frame(width: 125, height: 125)
-                                                        .cornerRadius(5)
-                                                        .border(Color.green, width: 5)
-                                                }
-                                                else
-                                                {
-                                                    Image("\(categoryProject.categoryProjectImage)")
-                                                        .resizable()
-                                                        .frame(width: 125, height: 125)
-                                                        .cornerRadius(5)
-                                                        .overlay(
-                                                            VStack {
-                                                                Spacer()
-                                                                Text(categoryProject.categoryProjectTitle)
-                                                                    .fontWeight(.heavy)
-                                                                    .foregroundColor(Color.white)
-                                                                Text("")
-                                                                    .frame(height: 2)
-                                                                
-                                                            }
-                                                        )
-                                                }
+                                            if (selectedCategory == categoryProject)
+                                            {
+                                                Image("\(categoryProject.categoryProjectImage)")
+                                                    .resizable()
+                                                    .frame(width: 125, height: 125)
+                                                    .cornerRadius(5)
+                                                    .border(Color.green, width: 5)
                                             }
-                                            
+                                            else
+                                            {
+                                                Image("\(categoryProject.categoryProjectImage)")
+                                                    .resizable()
+                                                    .frame(width: 125, height: 125)
+                                                    .cornerRadius(5)
+                                                    .overlay(
+                                                        VStack {
+                                                            Spacer()
+                                                            Text(categoryProject.categoryProjectTitle)
+                                                                .fontWeight(.heavy)
+                                                                .foregroundColor(Color.white)
+                                                            Text("")
+                                                                .frame(height: 2)
+                                                            
+                                                        }
+                                                    )
+                                            }
                                         })
                                         
                                     }
@@ -202,6 +202,18 @@ extension CreateProjectView {
         newProject.created_date = Date()
         newProject.finished_date = Date().addingTimeInterval(TimeInterval(86400 * (Int(duree) ?? 0)))
         newProject.category = selectedCategory.rawValue
+        
+        if users.isEmpty {
+            let newUser = User(context: managedObjectContext)
+            newUser.firstname = "Mounir"
+            newUser.lastname = "DJIAR"
+            newUser.email = "mounir@djiar.com"
+            
+        }
+        else {
+            
+        }
+        
         
         // On save la nouvelle instance dans le MOC
         do {

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Contribution" representedClassName="Contribution" syncable="YES">
+        <attribute name="amount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="project" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="contributions" inverseEntity="Project"/>
+        <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="contributions" inverseEntity="User"/>
+    </entity>
     <entity name="Project" representedClassName="Project" syncable="YES">
         <attribute name="budget" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="category" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -9,8 +14,19 @@
         <attribute name="picture" attributeType="String"/>
         <attribute name="title" attributeType="String"/>
         <attribute name="video" optional="YES" attributeType="String"/>
+        <relationship name="contributions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Contribution" inverseName="project" inverseEntity="Contribution"/>
+        <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="projects" inverseEntity="User"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="email" attributeType="String"/>
+        <attribute name="firstname" attributeType="String"/>
+        <attribute name="lastname" attributeType="String"/>
+        <relationship name="contributions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Contribution" inverseName="user" inverseEntity="Contribution"/>
+        <relationship name="projects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Project" inverseName="user" inverseEntity="Project"/>
     </entity>
     <elements>
-        <element name="Project" positionX="-63" positionY="-18" width="128" height="163"/>
+        <element name="Contribution" positionX="-351" positionY="-99" width="128" height="88"/>
+        <element name="Project" positionX="-164.1875" positionY="-82.23828125" width="128" height="193"/>
+        <element name="User" positionX="-535.51953125" positionY="-249.16015625" width="128" height="118"/>
     </elements>
 </model>

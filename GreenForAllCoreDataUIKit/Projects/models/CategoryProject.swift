@@ -9,14 +9,13 @@ import Foundation
 
 
 enum CategoryProject : Int64, CaseIterable {
-    case energie, batiment, transport, none
+    case energie, batiment, transport
     
     var categoryProjectTitle : String {
         switch self {
         case .energie: return "Enérgie"
         case .batiment: return "Batiment"
         case .transport: return "Transport"
-        case .none: return "none"
         }
     }
     
@@ -25,7 +24,6 @@ enum CategoryProject : Int64, CaseIterable {
         case .energie: return "energie"
         case .batiment: return "batiment"
         case .transport: return "transport"
-        case .none: return "none"
         }
     }
 }

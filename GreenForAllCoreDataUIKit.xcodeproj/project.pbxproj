@@ -14,14 +14,20 @@
 		7D297EBB2607F19000FEDACD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D297EBA2607F19000FEDACD /* Assets.xcassets */; };
 		7D297EBE2607F19000FEDACD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D297EBD2607F19000FEDACD /* Preview Assets.xcassets */; };
 		7D297EC12607F19000FEDACD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D297EBF2607F19000FEDACD /* LaunchScreen.storyboard */; };
-		7D297ECB2607F2A100FEDACD /* Project+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D297EC92607F2A100FEDACD /* Project+CoreDataClass.swift */; };
-		7D297ECC2607F2A100FEDACD /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D297ECA2607F2A100FEDACD /* Project+CoreDataProperties.swift */; };
 		7D297ED22607F37900FEDACD /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D297ED12607F37900FEDACD /* ProjectListView.swift */; };
 		7D297ED52607F3C300FEDACD /* ProjectRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D297ED42607F3C300FEDACD /* ProjectRow.swift */; };
 		7D297ED82607F5A200FEDACD /* CategoryProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D297ED72607F5A200FEDACD /* CategoryProject.swift */; };
 		7D297EDC2607F83200FEDACD /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D297EDB2607F83200FEDACD /* ProgressBar.swift */; };
 		7D297EE42608049300FEDACD /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D297EE32608049300FEDACD /* SearchBar.swift */; };
 		7D297EE72608052500FEDACD /* ProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D297EE62608052500FEDACD /* ProjectDetailView.swift */; };
+		7D5FC7002608B2ED00F28C72 /* CategorySegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5FC6FF2608B2ED00F28C72 /* CategorySegmentedControl.swift */; };
+		7D6452FC2609E80100C37C56 /* Contribution+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6452F62609E80100C37C56 /* Contribution+CoreDataClass.swift */; };
+		7D6452FD2609E80100C37C56 /* Contribution+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6452F72609E80100C37C56 /* Contribution+CoreDataProperties.swift */; };
+		7D6452FE2609E80100C37C56 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6452F82609E80100C37C56 /* User+CoreDataClass.swift */; };
+		7D6452FF2609E80100C37C56 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6452F92609E80100C37C56 /* User+CoreDataProperties.swift */; };
+		7D6453002609E80100C37C56 /* Project+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6452FA2609E80100C37C56 /* Project+CoreDataClass.swift */; };
+		7D6453012609E80100C37C56 /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6452FB2609E80100C37C56 /* Project+CoreDataProperties.swift */; };
+		7D88B23E26095C6C0066E419 /* ContributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D88B23D26095C6C0066E419 /* ContributionView.swift */; };
 		7DDAAF0B26080D7C004AF65F /* CreateProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDAAF0A26080D7C004AF65F /* CreateProjectView.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,14 +41,20 @@
 		7D297EBD2607F19000FEDACD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7D297EC02607F19000FEDACD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7D297EC22607F19000FEDACD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7D297EC92607F2A100FEDACD /* Project+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataClass.swift"; sourceTree = "<group>"; };
-		7D297ECA2607F2A100FEDACD /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7D297ED12607F37900FEDACD /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
 		7D297ED42607F3C300FEDACD /* ProjectRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRow.swift; sourceTree = "<group>"; };
 		7D297ED72607F5A200FEDACD /* CategoryProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryProject.swift; sourceTree = "<group>"; };
 		7D297EDB2607F83200FEDACD /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		7D297EE32608049300FEDACD /* SearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		7D297EE62608052500FEDACD /* ProjectDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectDetailView.swift; sourceTree = "<group>"; };
+		7D5FC6FF2608B2ED00F28C72 /* CategorySegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySegmentedControl.swift; sourceTree = "<group>"; };
+		7D6452F62609E80100C37C56 /* Contribution+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Contribution+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7D6452F72609E80100C37C56 /* Contribution+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Contribution+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7D6452F82609E80100C37C56 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7D6452F92609E80100C37C56 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7D6452FA2609E80100C37C56 /* Project+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7D6452FB2609E80100C37C56 /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Project+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7D88B23D26095C6C0066E419 /* ContributionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionView.swift; sourceTree = "<group>"; };
 		7DDAAF0A26080D7C004AF65F /* CreateProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,6 +88,10 @@
 		7D297EB02607F19000FEDACD /* GreenForAllCoreDataUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				7D64530B2609F16800C37C56 /* Market */,
+				7D64530A2609F14600C37C56 /* Guide */,
+				7D88B24D260973950066E419 /* Contributions */,
+				7D5714D126094ACE00F8BB95 /* Users */,
 				7D297ECF2607F2E900FEDACD /* Projects */,
 				7D297EB12607F19000FEDACD /* AppDelegate.swift */,
 				7D297EB32607F19000FEDACD /* SceneDelegate.swift */,
@@ -110,6 +126,7 @@
 		7D297EDA2607F76200FEDACD /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				7D5FC6FF2608B2ED00F28C72 /* CategorySegmentedControl.swift */,
 				7D297EE32608049300FEDACD /* SearchBar.swift */,
 				7D297EDB2607F83200FEDACD /* ProgressBar.swift */,
 			);
@@ -119,9 +136,9 @@
 		7D297EDE2607F86700FEDACD /* models */ = {
 			isa = PBXGroup;
 			children = (
+				7D6452FA2609E80100C37C56 /* Project+CoreDataClass.swift */,
+				7D6452FB2609E80100C37C56 /* Project+CoreDataProperties.swift */,
 				7D297ED72607F5A200FEDACD /* CategoryProject.swift */,
-				7D297EC92607F2A100FEDACD /* Project+CoreDataClass.swift */,
-				7D297ECA2607F2A100FEDACD /* Project+CoreDataProperties.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -133,6 +150,103 @@
 				7D297ED12607F37900FEDACD /* ProjectListView.swift */,
 				7DDAAF0A26080D7C004AF65F /* CreateProjectView.swift */,
 				7D297ED42607F3C300FEDACD /* ProjectRow.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		7D5714D126094ACE00F8BB95 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				7D88B24C260973710066E419 /* views */,
+				7D88B24B2609735B0066E419 /* models */,
+			);
+			path = Users;
+			sourceTree = "<group>";
+		};
+		7D64530A2609F14600C37C56 /* Guide */ = {
+			isa = PBXGroup;
+			children = (
+				7D64530D2609F18000C37C56 /* views */,
+				7D64530C2609F17500C37C56 /* models */,
+			);
+			path = Guide;
+			sourceTree = "<group>";
+		};
+		7D64530B2609F16800C37C56 /* Market */ = {
+			isa = PBXGroup;
+			children = (
+				7D64530F2609F19900C37C56 /* models */,
+				7D64530E2609F19100C37C56 /* views */,
+			);
+			path = Market;
+			sourceTree = "<group>";
+		};
+		7D64530C2609F17500C37C56 /* models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		7D64530D2609F18000C37C56 /* views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		7D64530E2609F19100C37C56 /* views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		7D64530F2609F19900C37C56 /* models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		7D88B24B2609735B0066E419 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				7D6452F82609E80100C37C56 /* User+CoreDataClass.swift */,
+				7D6452F92609E80100C37C56 /* User+CoreDataProperties.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		7D88B24C260973710066E419 /* views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		7D88B24D260973950066E419 /* Contributions */ = {
+			isa = PBXGroup;
+			children = (
+				7D88B26B260976E60066E419 /* views */,
+				7D88B26A260976DF0066E419 /* models */,
+			);
+			path = Contributions;
+			sourceTree = "<group>";
+		};
+		7D88B26A260976DF0066E419 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				7D6452F62609E80100C37C56 /* Contribution+CoreDataClass.swift */,
+				7D6452F72609E80100C37C56 /* Contribution+CoreDataProperties.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		7D88B26B260976E60066E419 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				7D88B23D26095C6C0066E419 /* ContributionView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -207,16 +321,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D5FC7002608B2ED00F28C72 /* CategorySegmentedControl.swift in Sources */,
 				7D297EB22607F19000FEDACD /* AppDelegate.swift in Sources */,
 				7D297ED82607F5A200FEDACD /* CategoryProject.swift in Sources */,
+				7D6453012609E80100C37C56 /* Project+CoreDataProperties.swift in Sources */,
+				7D6453002609E80100C37C56 /* Project+CoreDataClass.swift in Sources */,
 				7D297EB42607F19000FEDACD /* SceneDelegate.swift in Sources */,
+				7D88B23E26095C6C0066E419 /* ContributionView.swift in Sources */,
 				7D297ED52607F3C300FEDACD /* ProjectRow.swift in Sources */,
+				7D6452FE2609E80100C37C56 /* User+CoreDataClass.swift in Sources */,
 				7D297EB62607F19000FEDACD /* ContentView.swift in Sources */,
 				7D297EB92607F19000FEDACD /* GreenForAllCoreDataUIKit.xcdatamodeld in Sources */,
-				7D297ECC2607F2A100FEDACD /* Project+CoreDataProperties.swift in Sources */,
-				7D297ECB2607F2A100FEDACD /* Project+CoreDataClass.swift in Sources */,
+				7D6452FD2609E80100C37C56 /* Contribution+CoreDataProperties.swift in Sources */,
 				7D297EDC2607F83200FEDACD /* ProgressBar.swift in Sources */,
 				7D297EE42608049300FEDACD /* SearchBar.swift in Sources */,
+				7D6452FC2609E80100C37C56 /* Contribution+CoreDataClass.swift in Sources */,
+				7D6452FF2609E80100C37C56 /* User+CoreDataProperties.swift in Sources */,
 				7DDAAF0B26080D7C004AF65F /* CreateProjectView.swift in Sources */,
 				7D297ED22607F37900FEDACD /* ProjectListView.swift in Sources */,
 				7D297EE72608052500FEDACD /* ProjectDetailView.swift in Sources */,

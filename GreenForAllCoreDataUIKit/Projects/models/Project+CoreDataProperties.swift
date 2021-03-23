@@ -2,7 +2,7 @@
 //  Project+CoreDataProperties.swift
 //  GreenForAllCoreDataUIKit
 //
-//  Created by Mounir DJIAR on 21/03/2021.
+//  Created by Mounir DJIAR on 23/03/2021.
 //
 //
 
@@ -18,14 +18,33 @@ extension Project {
         return request
     }
 
-    @NSManaged public var title: String
-    @NSManaged public var description_project: String
-    @NSManaged public var picture: String
     @NSManaged public var budget: Int64
-    @NSManaged public var created_date: Date
-    @NSManaged public var finished_date: Date
-    @NSManaged public var video: String?
     @NSManaged public var category: Int64
+    @NSManaged public var created_date: Date?
+    @NSManaged public var description_project: String
+    @NSManaged public var finished_date: Date?
+    @NSManaged public var picture: String
+    @NSManaged public var title: String
+    @NSManaged public var video: String?
+    @NSManaged public var contributions: NSSet?
+    @NSManaged public var user: User?
+
+}
+
+// MARK: Generated accessors for contributions
+extension Project {
+
+    @objc(addContributionsObject:)
+    @NSManaged public func addToContributions(_ value: Contribution)
+
+    @objc(removeContributionsObject:)
+    @NSManaged public func removeFromContributions(_ value: Contribution)
+
+    @objc(addContributions:)
+    @NSManaged public func addToContributions(_ values: NSSet)
+
+    @objc(removeContributions:)
+    @NSManaged public func removeFromContributions(_ values: NSSet)
 
 }
 

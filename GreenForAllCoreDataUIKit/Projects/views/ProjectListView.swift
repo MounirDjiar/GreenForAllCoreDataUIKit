@@ -15,6 +15,8 @@ struct ProjectListView: View {
     // On récupère les données stockées
     @FetchRequest(fetchRequest: Project.fetchRequest()) var projects:FetchedResults<Project>
     
+    @State var selectedCategory:CategoryProject = CategoryProject.energie
+    
     @State var searchText: String = ""
     @State var showAddProjectView:Bool = false
     
@@ -36,6 +38,15 @@ struct ProjectListView: View {
                     
                     Divider()
                     
+                    Spacer()
+                    Spacer()
+                    
+                    // Segmented Control Categories
+                    CategorySegmentedControl(selectedCategory: $selectedCategory)
+                    
+                    Spacer()
+                    Spacer()
+                    
                     //Liste des projets
                     projectList
                     
@@ -51,12 +62,9 @@ struct ProjectListView: View {
                 CreateProjectView(showCreateProjectView: $showAddProjectView)
                     .environment(\.managedObjectContext, managedObjectContext)
             })
-            
         } //: NAVIGATION
- 
     }
 }
-
 
 extension ProjectListView {
     
@@ -77,8 +85,8 @@ extension ProjectListView {
         ScrollView {
             ForEach (
                 projects.filter {
-                    searchText.isEmpty ||
-                        $0.title.localizedStandardContains(searchText)
+                    (searchText.isEmpty || $0.title.localizedStandardContains(searchText))
+                        && ($0.category == selectedCategory.rawValue)
                 }
             ) { project in
                 NavigationLink(
@@ -86,7 +94,6 @@ extension ProjectListView {
                     label: {
                         ProjectRow(project: project)
                     })
-                    
             }//: ForEach
         }//:ScrollView
     }
@@ -106,10 +113,18 @@ struct ProjectListView_Previews: PreviewProvider {
         project1.budget = 12000
         project1.picture = "icon_project1"
         project1.category = CategoryProject.energie.rawValue
+        project1.created_date = Date()
+        project1.description_project = "Description du projet"
+        
+        // Creation du User
+        let user1 = User(context: context)
+        user1.firstname = "Mounir"
+        user1.lastname = "DJIAR"
+        user1.email = "mounir@djiar.com"
+        project1.user = user1
         
         return ProjectListView()
             .environment(\.managedObjectContext, context)
 
-        
     }
 }

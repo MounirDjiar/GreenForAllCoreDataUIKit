@@ -30,7 +30,8 @@ struct ProjectRow: View {
                 Spacer()
                 
                 HStack {
-                    ProgressBar(value: 0.9).frame(height: 20)
+                    ProgressBar(value: 0.3, filColor: Color("bgGreen"))
+                        .frame(height: 20)
                 }//:HStack
                 
                 Spacer()
