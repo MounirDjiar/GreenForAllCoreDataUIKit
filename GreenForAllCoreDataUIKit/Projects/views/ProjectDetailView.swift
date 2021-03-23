@@ -68,6 +68,7 @@ struct ProjectDetailView: View {
                 .padding(.vertical)
                 
                 HStack {
+                    
                     VStack {
                         HStack {
                             Image(systemName: "person.fill")
