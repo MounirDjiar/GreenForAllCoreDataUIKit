@@ -37,10 +37,10 @@ struct TabBar: View {
                 Grid()
                     .tag(tabItems[1])
                 
-                Text("inserer Market ici")
+                MarketList()
                     .tag(tabItems[2])
                 
-                Text("inserer Profile ici")
+                ProfilView()
                     .tag(tabItems[3])
             }
             

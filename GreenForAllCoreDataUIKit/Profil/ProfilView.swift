@@ -9,11 +9,10 @@ import SwiftUI
 
 struct ProfilView: View {
     
-    let profil: Profil
+    let profil: Profil = Profil(firstname: "Baptiste", lastname: "Moulin", image: "Profil", mail: "baptiste.moulin@gmail.com", password: "password")
     
     var body: some View {
-        
-        
+
         NavigationView{
             ZStack{
                 Color("bgGreen")
@@ -92,6 +91,6 @@ struct ProfilView_Previews: PreviewProvider {
     
     
     static var previews: some View {
-        ProfilView(profil: Profil(firstname: "Baptiste", lastname: "Moulin", image: "Profil", mail: "baptiste.moulin@gmail.com", password: "password"))
+        ProfilView()
     }
 }

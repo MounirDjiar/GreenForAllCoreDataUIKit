@@ -191,7 +191,6 @@ struct CreateProjectView: View {
                                     if let tdata = timage.pngData() {
                                         urlimg = getDocumentsDirectory().appendingPathComponent("CP-" + title + ".png")
                                         try? tdata.write(to: urlimg!)
-                                        
                                     }
                                 }
                             }, label: {
@@ -206,6 +205,9 @@ struct CreateProjectView: View {
                             })
                         }
                     }
+                    .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
+                                            ImagePicker(image: self.$inputImage)
+                                        }
                     
                     Section {
                         TextField("URL Vidéo (optionnel)", text: $urlvideo)
