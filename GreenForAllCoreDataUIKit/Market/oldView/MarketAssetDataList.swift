@@ -41,7 +41,7 @@ struct MarketAssetDataList: View {
         
             VStack(alignment: .leading) {
                 // SearchBar
-                SearchBar(searchText: $searchText)
+                SearchBarYoko(searchText: $searchText)
                 
                 Text(now, style: .date).padding()
                 

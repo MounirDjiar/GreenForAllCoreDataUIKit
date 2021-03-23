@@ -11,7 +11,7 @@ import Combine
 class StockData : ObservableObject {
     
     @Published var prices = [Double]()
-    @Published var date = ""  // added by yoko
+    //@Published var date = ""  // added by yoko
     @Published var currentPrice = "...."
     @Published var open = ""
     @Published var close = ""
@@ -56,9 +56,13 @@ class StockData : ObservableObject {
             var stockPrices = [Double]()
         
         let lastRefreshed = "2021-03-22"
-        let myStockDataJsonFile = stockSymbol + lastRefreshed
+        let myStockDataJsonFile = stockSymbol + lastRefreshed + ".json"
+        print(myStockDataJsonFile)
+        
         //let myStockData = Bundle.main.decode("IBM2021-03-22.json")
         let value = Bundle.main.decode(myStockDataJsonFile)
+        
+        
         print("load completed. value.timeSeriesDaily.count = ")
         print(value.timeSeriesDaily?.count)//IBMstockData.timeSeriesDaily?[lastRefreshed]?.open ?? "none")
             let orderedDates =  value.timeSeriesDaily?.sorted{
@@ -79,6 +83,7 @@ class StockData : ObservableObject {
             
             DispatchQueue.main.async{
                 self.prices = stockPrices
+                
                 self.currentPrice = stockData.last?.value.close ?? "..."
                 self.open = stockData.last?.value.open ?? "..."
                 self.close = stockData.last?.value.close ?? "..."

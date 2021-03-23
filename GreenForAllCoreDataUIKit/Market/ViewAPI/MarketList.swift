@@ -29,7 +29,7 @@ struct MarketList: View {
         switch(item) {
         case "AAPL": return stockAAPL
         case "IBM": return stockIBM
-        //case "MSFT": return stockMSFT
+        case "MSFT": return stockMSFT
         default:
             return Stocks(stockSymbol: "")
         }
@@ -58,7 +58,7 @@ struct MarketList: View {
         
             VStack(alignment: .leading) {
                 // SearchBar
-                SearchBar(searchText: $searchText)
+                SearchBarYoko(searchText: $searchText)
                 
                 Text(now, style: .date).padding()
                 

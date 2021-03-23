@@ -13,11 +13,32 @@ struct MarketListJson: View {
     let IBMstockData = Bundle.main.decode("IBM2021-03-22.json")
     let lastRefreshed = "2021-03-22"
     */
-    
+    /*
+    @ObservedObject var stockGRNB = StockData(stockSymbol: "GRNB")
+    @ObservedObject var stockMGGAX = StockData(stockSymbol: "MGGAX")
+    @ObservedObject var stockCGAFX = StockData(stockSymbol: "CGAFX")
+    @ObservedObject var stockBGRN = StockData(stockSymbol: "BGRN")
+    @ObservedObject var stockIQQHDE = StockData(stockSymbol: "IQQH.DE")
+    @ObservedObject var stockQCLN = StockData(stockSymbol: "QCLN")
+    @ObservedObject var stockPBW =  StockData(stockSymbol: "PBW")
     @ObservedObject var stockAAPL = StockData(stockSymbol: "AAPL")
     @ObservedObject var stockIBM = StockData(stockSymbol: "IBM")
     @ObservedObject var stockMSFT = StockData(stockSymbol: "MSFT")
-    @EnvironmentObject var modelData: ModelData
+    */
+    @StateObject var stockGRNB = StockData(stockSymbol: "GRNB")
+    @StateObject var stockMGGAX = StockData(stockSymbol: "MGGAX")
+    @StateObject var stockCGAFX = StockData(stockSymbol: "CGAFX")
+    @StateObject var stockBGRN = StockData(stockSymbol: "BGRN")
+    @StateObject var stockIQQHDE = StockData(stockSymbol: "IQQH.DE")
+    @StateObject var stockQCLN = StockData(stockSymbol: "QCLN")
+    @StateObject var stockPBW =  StockData(stockSymbol: "PBW")
+    @StateObject var stockAAPL = StockData(stockSymbol: "AAPL")
+    @StateObject var stockIBM = StockData(stockSymbol: "IBM")
+    @StateObject var stockMSFT = StockData(stockSymbol: "MSFT")
+    
+    //@EnvironmentObject var modelData: ModelData
+    @StateObject var modelData = ModelData()
+    
     @State private var showFavoritesOnly = false
     
     init() {
@@ -30,9 +51,16 @@ struct MarketListJson: View {
     
     private func assign(item: String) -> StockData {
         switch(item) {
+        case "GRNB": return stockGRNB
+        case "MGGAX": return stockMGGAX
+        case "CGAFX": return stockCGAFX
+        case "BGRN": return stockBGRN
+        case "IQQH.DE": return stockIQQHDE
+        case "QCLN": return stockQCLN
+        case "PBW": return stockPBW
         case "AAPL": return stockAAPL
         case "IBM": return stockIBM
-        //case "MSFT": return stockMSFT
+        case "MSFT": return stockMSFT
         default:
             return StockData(stockSymbol: "")
         }
@@ -61,7 +89,7 @@ struct MarketListJson: View {
         
             VStack(alignment: .leading) {
                 // SearchBar
-                SearchBar(searchText: $searchText)
+                SearchBarYoko(searchText: $searchText)
                 
                 Text(now, style: .date).padding()
                 
@@ -78,7 +106,7 @@ struct MarketListJson: View {
                         //ForEach(modelData.assetInfos) { element in
                     //ForEach(filteredItem) { element in
                         NavigationLink( destination: //MarketAssetDataDetailView(item: element, stocks: assign(item: element.symbol)),
-                            MarketDetail(assetInfo: element),
+                            MarketDetailJson(stockGRNB: stockGRNB, stockMGGAX: stockMGGAX, stockCGAFX: stockCGAFX, stockBGRN: stockBGRN, stockIQQHDE: stockIQQHDE, stockQCLN: stockQCLN, stockPBW: stockPBW, stockAAPL: stockAAPL, stockIBM: stockIBM, stockMSFT: stockMSFT,  assetInfo: element),
                             //MarketDetail(assetInfo: searchedItem[index]),
                         label: {
                             //Text(element.symbol)
@@ -96,12 +124,26 @@ struct MarketListJson: View {
         .foregroundColor(.white)
 
         }
+        /*
+        .environmentObject(stockGRNB)
+        .environmentObject(stockMGGAX)
+        .environmentObject(stockCGAFX)
+        .environmentObject(stockBGRN)
+        .environmentObject(stockIQQHDE)
+        .environmentObject(stockQCLN)
+        .environmentObject(stockPBW)
+        .environmentObject(stockAAPL)
+        .environmentObject(stockIBM)
+        .environmentObject(stockMSFT)
+         */
+        .environmentObject(modelData)
     }
 }
 
 struct MarketListJson_Previews: PreviewProvider {
     static var previews: some View {
-        MarketListJson().environmentObject(ModelData())
+        MarketListJson().environmentObject(ModelData()).environmentObject(StockData(stockSymbol: ""))
+        
     }
 }
 
@@ -157,7 +199,7 @@ extension MarketListJson {
         let open = Double(assign(item: element.symbol).open) ?? 0.0 //Double(stockAAPL.open) ?? 0
         let currentPrice = Double(assign(item: element.symbol).currentPrice) ?? 0.0 //Double(stockAAPL.open) ?? 0
         let close = Double(assign(item: element.symbol).close) ?? 0.0//Double(stockAAPL.close) ?? 0
-        let priceChange = currentPrice - close
+        let priceChange = currentPrice - open
         let percentChange = priceChange / currentPrice * 100
         
     let colorChange = priceChange >= 0 ? Color.green : Color.red
