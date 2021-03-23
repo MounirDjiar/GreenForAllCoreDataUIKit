@@ -17,10 +17,10 @@ class CurrentUser: ObservableObject {
     
     init(contexte: NSManagedObjectContext) {
         self.contexte = contexte
-        makeRequest ()
+        getUser ()
     }
     
-    func makeRequest () {
+    func getUser () {
         
         let request = NSFetchRequest<User>(entityName: "User")
         request.fetchLimit = 1
