@@ -56,10 +56,6 @@
 		BFF390AE260AA575006AFCB5 /* CombineJSONStockPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF3908C260AA575006AFCB5 /* CombineJSONStockPrice.swift */; };
 		BFF390AF260AA575006AFCB5 /* MarketDetailJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF3908D260AA575006AFCB5 /* MarketDetailJson.swift */; };
 		BFF390B0260AA575006AFCB5 /* MarketListJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF3908E260AA575006AFCB5 /* MarketListJson.swift */; };
-		BFF390B1260AA575006AFCB5 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF3908F260AA575006AFCB5 /* TestView.swift */; };
-		BFF390B2260AA575006AFCB5 /* MarketAssetDataList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF39091260AA575006AFCB5 /* MarketAssetDataList.swift */; };
-		BFF390B3260AA575006AFCB5 /* MarketAssetDataDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF39092260AA575006AFCB5 /* MarketAssetDataDetailView.swift */; };
-		BFF390B4260AA575006AFCB5 /* Market.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF39093260AA575006AFCB5 /* Market.swift */; };
 		BFF390B5260AA575006AFCB5 /* AAPL2021-03-22.json in Resources */ = {isa = PBXBuildFile; fileRef = BFF39095260AA575006AFCB5 /* AAPL2021-03-22.json */; };
 		BFF390B6260AA575006AFCB5 /* QCLN2021-03-22.json in Resources */ = {isa = PBXBuildFile; fileRef = BFF39096260AA575006AFCB5 /* QCLN2021-03-22.json */; };
 		BFF390B7260AA575006AFCB5 /* MGGAX2021-03-22.json in Resources */ = {isa = PBXBuildFile; fileRef = BFF39097260AA575006AFCB5 /* MGGAX2021-03-22.json */; };
@@ -69,7 +65,6 @@
 		BFF390BB260AA575006AFCB5 /* MSFT2021-03-22.json in Resources */ = {isa = PBXBuildFile; fileRef = BFF3909B260AA575006AFCB5 /* MSFT2021-03-22.json */; };
 		BFF390BC260AA575006AFCB5 /* BGRN2021-03-22.json in Resources */ = {isa = PBXBuildFile; fileRef = BFF3909C260AA575006AFCB5 /* BGRN2021-03-22.json */; };
 		BFF390BD260AA575006AFCB5 /* CGAFX2021-03-22.json in Resources */ = {isa = PBXBuildFile; fileRef = BFF3909D260AA575006AFCB5 /* CGAFX2021-03-22.json */; };
-		BFF390BE260AA575006AFCB5 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF3909E260AA575006AFCB5 /* File.swift */; };
 		BFF390BF260AA575006AFCB5 /* StocksAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF390A0260AA575006AFCB5 /* StocksAPIModel.swift */; };
 		BFF390C0260AA575006AFCB5 /* IQQH.DE2021-03-22.json in Resources */ = {isa = PBXBuildFile; fileRef = BFF390A1260AA575006AFCB5 /* IQQH.DE2021-03-22.json */; };
 		BFF390C1260AA575006AFCB5 /* MarketModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF390A2260AA575006AFCB5 /* MarketModel.swift */; };
@@ -127,10 +122,6 @@
 		BFF3908C260AA575006AFCB5 /* CombineJSONStockPrice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombineJSONStockPrice.swift; sourceTree = "<group>"; };
 		BFF3908D260AA575006AFCB5 /* MarketDetailJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketDetailJson.swift; sourceTree = "<group>"; };
 		BFF3908E260AA575006AFCB5 /* MarketListJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketListJson.swift; sourceTree = "<group>"; };
-		BFF3908F260AA575006AFCB5 /* TestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
-		BFF39091260AA575006AFCB5 /* MarketAssetDataList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketAssetDataList.swift; sourceTree = "<group>"; };
-		BFF39092260AA575006AFCB5 /* MarketAssetDataDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketAssetDataDetailView.swift; sourceTree = "<group>"; };
-		BFF39093260AA575006AFCB5 /* Market.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Market.swift; sourceTree = "<group>"; };
 		BFF39095260AA575006AFCB5 /* AAPL2021-03-22.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "AAPL2021-03-22.json"; sourceTree = "<group>"; };
 		BFF39096260AA575006AFCB5 /* QCLN2021-03-22.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "QCLN2021-03-22.json"; sourceTree = "<group>"; };
 		BFF39097260AA575006AFCB5 /* MGGAX2021-03-22.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "MGGAX2021-03-22.json"; sourceTree = "<group>"; };
@@ -140,7 +131,6 @@
 		BFF3909B260AA575006AFCB5 /* MSFT2021-03-22.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "MSFT2021-03-22.json"; sourceTree = "<group>"; };
 		BFF3909C260AA575006AFCB5 /* BGRN2021-03-22.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "BGRN2021-03-22.json"; sourceTree = "<group>"; };
 		BFF3909D260AA575006AFCB5 /* CGAFX2021-03-22.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "CGAFX2021-03-22.json"; sourceTree = "<group>"; };
-		BFF3909E260AA575006AFCB5 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		BFF390A0260AA575006AFCB5 /* StocksAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StocksAPIModel.swift; sourceTree = "<group>"; };
 		BFF390A1260AA575006AFCB5 /* IQQH.DE2021-03-22.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "IQQH.DE2021-03-22.json"; sourceTree = "<group>"; };
 		BFF390A2260AA575006AFCB5 /* MarketModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarketModel.swift; sourceTree = "<group>"; };
@@ -348,14 +338,12 @@
 		BFF3907C260AA575006AFCB5 /* Market */ = {
 			isa = PBXGroup;
 			children = (
-				BFF3907D260AA575006AFCB5 /* LoadDataFile.swift */,
 				BFF3907E260AA575006AFCB5 /* tools */,
 				BFF39082260AA575006AFCB5 /* ViewAPI */,
+				BFF3908B260AA575006AFCB5 /* ViewJSON */,
 				BFF39086260AA575006AFCB5 /* graph */,
 				BFF3908A260AA575006AFCB5 /* Bundle_Decodable.swift */,
-				BFF3908B260AA575006AFCB5 /* ViewJSON */,
-				BFF3908F260AA575006AFCB5 /* TestView.swift */,
-				BFF39090260AA575006AFCB5 /* oldView */,
+				BFF3907D260AA575006AFCB5 /* LoadDataFile.swift */,
 				BFF39094260AA575006AFCB5 /* json */,
 				BFF3909F260AA575006AFCB5 /* Model */,
 			);
@@ -402,16 +390,6 @@
 			path = ViewJSON;
 			sourceTree = "<group>";
 		};
-		BFF39090260AA575006AFCB5 /* oldView */ = {
-			isa = PBXGroup;
-			children = (
-				BFF39091260AA575006AFCB5 /* MarketAssetDataList.swift */,
-				BFF39092260AA575006AFCB5 /* MarketAssetDataDetailView.swift */,
-				BFF39093260AA575006AFCB5 /* Market.swift */,
-			);
-			path = oldView;
-			sourceTree = "<group>";
-		};
 		BFF39094260AA575006AFCB5 /* json */ = {
 			isa = PBXGroup;
 			children = (
@@ -424,7 +402,7 @@
 				BFF3909B260AA575006AFCB5 /* MSFT2021-03-22.json */,
 				BFF3909C260AA575006AFCB5 /* BGRN2021-03-22.json */,
 				BFF3909D260AA575006AFCB5 /* CGAFX2021-03-22.json */,
-				BFF3909E260AA575006AFCB5 /* File.swift */,
+				BFF390A1260AA575006AFCB5 /* IQQH.DE2021-03-22.json */,
 			);
 			path = json;
 			sourceTree = "<group>";
@@ -433,7 +411,6 @@
 			isa = PBXGroup;
 			children = (
 				BFF390A0260AA575006AFCB5 /* StocksAPIModel.swift */,
-				BFF390A1260AA575006AFCB5 /* IQQH.DE2021-03-22.json */,
 				BFF390A2260AA575006AFCB5 /* MarketModel.swift */,
 			);
 			path = Model;
@@ -531,14 +508,12 @@
 				BFF390B0260AA575006AFCB5 /* MarketListJson.swift in Sources */,
 				7D8956D2260A487B009466D5 /* CardRow.swift in Sources */,
 				7D297ED52607F3C300FEDACD /* ProjectRow.swift in Sources */,
-				BFF390B3260AA575006AFCB5 /* MarketAssetDataDetailView.swift in Sources */,
 				7D895632260A3514009466D5 /* ProfilView.swift in Sources */,
 				7D6452FE2609E80100C37C56 /* User+CoreDataClass.swift in Sources */,
 				7D8956CF260A487B009466D5 /* GuideModel.swift in Sources */,
 				7D297EB62607F19000FEDACD /* ContentView.swift in Sources */,
 				7D895633260A3514009466D5 /* Profil.swift in Sources */,
 				7D6453122609F75800C37C56 /* CurrentUser.swift in Sources */,
-				BFF390B4260AA575006AFCB5 /* Market.swift in Sources */,
 				BFF390A8260AA575006AFCB5 /* MarketList.swift in Sources */,
 				BFF390AB260AA575006AFCB5 /* SwiftUILine.swift in Sources */,
 				BFF390A4260AA575006AFCB5 /* SearchBarYoko.swift in Sources */,
@@ -547,13 +522,11 @@
 				7D297EB92607F19000FEDACD /* GreenForAllCoreDataUIKit.xcdatamodeld in Sources */,
 				BFF390A5260AA575006AFCB5 /* FavoriteButton.swift in Sources */,
 				7D895634260A3514009466D5 /* ProfilConnexion.swift in Sources */,
-				BFF390BE260AA575006AFCB5 /* File.swift in Sources */,
 				BFF390BF260AA575006AFCB5 /* StocksAPIModel.swift in Sources */,
 				BFF390AA260AA575006AFCB5 /* SwiftUILineView.swift in Sources */,
 				7D89564B260A353F009466D5 /* TabBar.swift in Sources */,
 				7D6452FD2609E80100C37C56 /* Contribution+CoreDataProperties.swift in Sources */,
 				7D297EDC2607F83200FEDACD /* ProgressBar.swift in Sources */,
-				BFF390B2260AA575006AFCB5 /* MarketAssetDataList.swift in Sources */,
 				7D297EE42608049300FEDACD /* SearchBar.swift in Sources */,
 				7D8956CE260A487B009466D5 /* CategoDummieData.swift in Sources */,
 				BFF390AF260AA575006AFCB5 /* MarketDetailJson.swift in Sources */,
@@ -562,7 +535,6 @@
 				7D8956D0260A487B009466D5 /* DetailOfDetail.swift in Sources */,
 				BFF390A3260AA575006AFCB5 /* LoadDataFile.swift in Sources */,
 				7D895635260A3514009466D5 /* ProfilPresentation.swift in Sources */,
-				BFF390B1260AA575006AFCB5 /* TestView.swift in Sources */,
 				7D6452FF2609E80100C37C56 /* User+CoreDataProperties.swift in Sources */,
 				BFF390A9260AA575006AFCB5 /* CombineURLSessionStockPrice.swift in Sources */,
 				7DDAAF0B26080D7C004AF65F /* CreateProjectView.swift in Sources */,
