@@ -57,7 +57,7 @@ struct ProjectDetailView: View {
                             .fontWeight(.bold)
 
                         ProgressBar(
-                            value: 0.5,
+                            value: getValue(budget: 34, contributions: 12),
                             filColor:Color("progressBarColor"),
                             bgColor: Color.white
                         )
@@ -68,12 +68,11 @@ struct ProjectDetailView: View {
                 .padding(.vertical)
                 
                 HStack {
-                    
                     VStack {
                         HStack {
                             Image(systemName: "person.fill")
                                 .font(.system(size: 25))
-                            Text("10")
+                            Text("\(project.contributions?.count ?? -1)")
                                 .fontWeight(.bold)
                                 .font(.system(size: 25))
                                 .padding(.leading, -10.0)
@@ -156,12 +155,18 @@ struct ProjectDetailView: View {
     }
 }
 
+
+extension ProjectDetailView {
+    private func getValue(budget: Int, contributions: Int) ->  Float {
+        return 0.4
+    }
+}
+
 extension ProjectDetailView {
     private func contribute() {
         showContributionView = true
     }
 }
-
 
 struct ProjectDetailView_Previews: PreviewProvider {
     static var previews: some View {
