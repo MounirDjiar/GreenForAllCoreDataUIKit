@@ -55,7 +55,6 @@ struct ProfilConnexion: View {
 //                                .fontWeight(.bold)
 //                        })
                         
-                        
                         NavigationLink(
                             destination: ProjectListView(),
                             label: {

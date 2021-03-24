@@ -156,16 +156,19 @@ struct ProjectDetailView: View {
                     if (canContribute()) {
                         HStack {
                             Spacer()
+                            
                             Button(action: {
                                 contribute()
+                                
                             }, label: {
                                 Text("Contribuer")
-                                    .font(.system(size: 25))
-                                    .frame(width: 200)
-                                    .padding(8.0)
-                                    .background(Color("progressBarColor"))
-                                    .cornerRadius(8)
+                                    .fontWeight(.bold)
                             })
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 100)
+                            .padding()
+                            .background(Color("bgDarkGreen"))
+                            .cornerRadius(10)
                             
                             Spacer()
                         }

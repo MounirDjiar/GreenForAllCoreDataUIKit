@@ -18,7 +18,7 @@ struct ContributionView: View {
     @Binding var showContributionView:Bool
     @State var amount:String = ""
     
-    var project:Project
+    @ObservedObject var project:Project
     
     var body: some View {
         
@@ -44,48 +44,46 @@ struct ContributionView: View {
         // Passer a false si on ne veut que la couleur de la navBar soit translucide
         //UINavigationBar.appearance().isTranslucent = false
         
-        return ZStack {
-            Color("bgGreen").ignoresSafeArea()
+        return  NavigationView {
             
-            VStack {
-                HStack {
-                    Text("Veuillez saisir le montnat de votre contribution")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                }
-                Form {
-                    TextField("Montant", text: $amount).keyboardType(.numberPad)
-                        .multilineTextAlignment(.center)
-                }
-                .frame(width: 200, height: 100, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            ZStack {
+                Color("bgGreen").ignoresSafeArea()
                 
-                HStack {
+                VStack(alignment: .center) {
                     Spacer()
-                    Button("Annuler") {
-                        showContributionView = false
+                    HStack {
+                        Text("Quel est le montant de votre contribution ?")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
                     }
-                    .font(.title)
-                    .frame(width: 100)
-                    .padding(8.0)
-                    .background(Color.white)
-                    .cornerRadius(8)
+                    Form {
+                        TextField("Montant", text: $amount).keyboardType(.numberPad)
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(Color("bgGreen"))
+                    } .frame(maxHeight: 150)
                     
-                    Spacer()
-                    
-                    Button("Valider") {
+                    Button(action: {
                         saveAmount()
-                    }
-                    .font(.title)
-                    .frame(width: 100)
-                    .padding(8.0)
-                    .background(Color.white)
-                    .cornerRadius(8)
-                    
+                        showContributionView = false
+                        
+                    }, label: {
+                        Text("Payer")
+                            .fontWeight(.bold)
+                    })
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 135)
+                    .padding()
+                    .background(Color("bgDarkGreen"))
+                    .cornerRadius(10)
                     Spacer()
-                    
-                }.foregroundColor(Color("greenSearchBar"))
+                }
             }
+            .navigationBarItems(trailing: Button(action: {showContributionView = false}, label: {
+                Image(systemName: "multiply")
+                    .font( .system(size: 25))
+            }))
+            .foregroundColor(.white)
         }
     }
 }
@@ -112,17 +110,3 @@ extension ContributionView {
         showContributionView = false
     }
 }
-
-/*
-struct ContributionView_Previews: PreviewProvider {
-    static var previews: some View {
-        
-        // On récupère le contexte
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
-        return ContributionView(showContributionView: .constant(true))
-            .environment(\.managedObjectContext, context)
-
-    }
-}
- */

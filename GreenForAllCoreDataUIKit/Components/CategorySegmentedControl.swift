@@ -20,7 +20,6 @@ struct CategorySegmentedControl: View {
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
-                
             }
             .padding(.horizontal)
         }

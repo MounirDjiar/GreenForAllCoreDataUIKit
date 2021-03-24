@@ -114,49 +114,48 @@ struct CreateProjectView: View {
                                     .padding(.leading, -10)
                                 Spacer()
                             }
-                            HStack {
-//                                    Spacer()
-                                ForEach (CategoryProject.allCases, id: \.self) { categoryProject in
-                                    Button(action: {
-                                        if (selectedCategory == categoryProject){
-                                            //selectedCategory = CategoryProject.none
-                                        }
-                                        else{
-                                            selectedCategory = categoryProject
-                                        }
-                                    }, label: {
-                                        if (selectedCategory == categoryProject)
-                                        {
-                                            Image("\(categoryProject.categoryProjectImage)")
-                                                .resizable()
-                                                .frame(width: 100, height: 100)
-                                                .cornerRadius(5)
-                                                .border(Color.green, width: 5)
-                                        }
-                                        else
-                                        {
-                                            Image("\(categoryProject.categoryProjectImage)")
-                                                .resizable()
-                                                .frame(width: 100, height: 100)
-                                                .cornerRadius(5)
-                                                .overlay(
-                                                    VStack {
-                                                        Spacer()
-                                                        Text(categoryProject.categoryProjectTitle)
-                                                            .fontWeight(.heavy)
-                                                            .foregroundColor(Color.white)
-                                                        Text("")
-                                                            .frame(height: 2)
-                                                        
-                                                    }
-                                                )
-                                        }
-                                    })
-                                    
-                                }
-//                                    Spacer()
-                            }.padding(.bottom, 10)
-
+                            ScrollView {
+                                HStack {
+                                    ForEach (CategoryProject.allCases, id: \.self) { categoryProject in
+                                        Button(action: {
+                                            if (selectedCategory == categoryProject){
+                                                //selectedCategory = CategoryProject.none
+                                            }
+                                            else{
+                                                selectedCategory = categoryProject
+                                            }
+                                        }, label: {
+                                            if (selectedCategory == categoryProject)
+                                            {
+                                                Image("\(categoryProject.categoryProjectImage)")
+                                                    .resizable()
+                                                    .frame(width: 100, height: 100)
+                                                    .cornerRadius(5)
+                                                    .border(Color.green, width: 5)
+                                            }
+                                            else
+                                            {
+                                                Image("\(categoryProject.categoryProjectImage)")
+                                                    .resizable()
+                                                    .frame(width: 100, height: 100)
+                                                    .cornerRadius(5)
+                                                    .overlay(
+                                                        VStack {
+                                                            Spacer()
+                                                            Text(categoryProject.categoryProjectTitle)
+                                                                .fontWeight(.heavy)
+                                                                .foregroundColor(Color.white)
+                                                            Text("")
+                                                                .frame(height: 2)
+                                                            
+                                                        }
+                                                    )
+                                            }
+                                        })
+                                        
+                                    }
+                                }.padding(.bottom, 10)
+                            }
                         }
                     }
                     
@@ -210,10 +209,6 @@ struct CreateProjectView: View {
                         ImagePicker(image: self.$inputImage)
                     }
                     
-                    //                    Section {
-                    //                        TextField("URL Vidéo (optionnel)", text: $urlvideo)
-                    //                    }
-                    
                 }// :Form
                 .disableAutocorrection(true)
                 
@@ -244,7 +239,7 @@ extension CreateProjectView {
     private var addButton: some View {
         Button("Créer") {
             
-            if title == "" || desc == "" || Int(budget) ?? 0 == 0 || urlimg == nil || (Int(duree) ?? 0 == 0) {
+            if title == "" || desc == "" || Int(budget) ?? 0 == 0 || (Int(duree) ?? 0 == 0) {
                 showingAlert = true
             }
             else {
@@ -288,7 +283,6 @@ extension CreateProjectView {
                 } catch {
                     print("error saving file:", error)
                 }
-//                                        try? tdata.write(to: urlimg!)
             }
         }
         
