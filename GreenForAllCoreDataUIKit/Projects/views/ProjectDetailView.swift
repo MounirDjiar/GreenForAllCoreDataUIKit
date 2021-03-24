@@ -6,16 +6,28 @@
 //
 
 import SwiftUI
+import UIKit
+
+private func load(fileName: String) -> UIImage? {
+    let fileURL = documentsUrl.appendingPathComponent(fileName)
+    do {
+        let imageData = try Data(contentsOf: fileURL)
+        return UIImage(data: imageData)
+    } catch {
+        print("Error loading image : \(error)")
+    }
+    return nil
+}
 
 struct ProjectDetailView: View {
-  
+    
     // On récupère le Managed Object Contexte pour le donner à la sheet
     @Environment(\.managedObjectContext) var managedObjectContext
     
     // Je récupère le current user depuis l'environement
     @EnvironmentObject var currentUser: CurrentUser
     
-    let project:Project
+    @ObservedObject var project:Project
     
     @State private var showContributionView:Bool = false
     
@@ -48,123 +60,124 @@ struct ProjectDetailView: View {
             // La couleur du background
             Color("bgGreen").ignoresSafeArea()
             
-            VStack(alignment: .leading){
-                HStack {
-                    Image(project.picture)
-                        .resizable()
-                        .scaledToFit()
-                        .cornerRadius(5.0)
-                        .overlay(
-                            HStack {
-                                Text("\(CategoryProject(rawValue: project.category)!.categoryProjectTitle)")
-                                    .font(.headline)
-                            }
-                            .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-                            .background(Color("progressBarColor"))
-                            .cornerRadius(15.0)
-                            .padding(.vertical, -10)
-                            .padding(.horizontal, -10)
-                            .shadow(radius: 10)
-                            , alignment: .bottomTrailing
-                        )
-                }
-                
-                HStack {
-                    VStack (alignment: .leading) {
-                        Text("Avancement du projet")
-                            .font(.headline)
-                            .fontWeight(.bold)
-                        ProgressBar(
-                            value: project.progressContributions,
-                            filColor:Color("progressBarColor"),
-                            bgColor: Color.white
-                        )
-                        .frame(height: 30)
-                    }//:VStack
-                    
-                }//:HStack
-                .padding(.vertical)
-                
-                HStack {
-                    VStack {
-                        HStack(alignment: .top) {
-                            Image(systemName: "person.fill")
-                                .font(.system(size: 25))
-                            Text("\(project.nbContributeurs)")
-                                .fontWeight(.bold)
-                                .font(.system(size: 25))
-                                .padding(.leading, -8.0)
-                        }
-                        Text("Contributeurs")
-                            .font(.system(size: 14))
-                    }
-                    
-                    Spacer()
-                    VStack {
-                        HStack {
-                            Image(systemName: "clock.arrow.circlepath")
-                                .font(.system(size: 25))
-                            Text("\(project.nbDaysLeftToProject)")
-                                .fontWeight(.bold)
-                                .font(.system(size: 25))
-                                .padding(.leading, -8.0)
-                        }
-                        Text("Jours restants")
-                            .font(.system(size: 14))
-                    }
-                    
-                    Spacer()
-                    VStack {
-                        HStack {
-                            Image(systemName: "eurosign.circle")
-                                .font(.system(size: 25))
-                            Text("\(project.budget)€")
-                                .fontWeight(.bold)
-                                .font(.system(size: 25))
-                                .padding(.leading, -9.0)
-                        }
-                        Text("Budget")
-                            .font(.system(size: 14))
-                    }
-                    
-                }//:HStack
-                .padding(.vertical)
-                
-                VStack {
-                    Text(project.description_project)
-                        .font(.body)
-                        .fontWeight(.semibold)
-                        .foregroundColor(Color.white)
-                        .multilineTextAlignment(.leading)
-                        .lineLimit(10)
-                    
-                }
-                
-                if (canContribute()) {
+            ScrollView (.vertical) {
+                VStack(alignment: .leading){
                     HStack {
-                        Spacer()
-                        Button(action: {
-                            contribute()
-                        }, label: {
-                            Text("Contribuer")
-                                .font(.system(size: 25))
-                                .frame(width: 200)
-                                .padding(8.0)
+                        Image(uiImage: (load(fileName: project.picture) ?? UIImage(named: "p1"))!)
+                            .resizable()
+                            .scaledToFit()
+                            .cornerRadius(5.0)
+                            .overlay(
+                                HStack {
+                                    Text("\(CategoryProject(rawValue: project.category)!.categoryProjectTitle)")
+                                        .font(.headline)
+                                }
+                                .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 30, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                                 .background(Color("progressBarColor"))
-                                .cornerRadius(8)
-                        })
+                                .cornerRadius(15.0)
+                                .padding(.vertical, -10)
+                                .padding(.horizontal, -10)
+                                .shadow(radius: 10)
+                                , alignment: .bottomTrailing
+                            )
+                    }
+                    
+                    HStack {
+                        VStack (alignment: .leading) {
+                            Text("Avancement du projet")
+                                .font(.headline)
+                                .fontWeight(.bold)
+                            ProgressBar(
+                                value: project.progressContributions,
+                                filColor:Color("progressBarColor"),
+                                bgColor: Color.white
+                            )
+                            .frame(height: 30)
+                        }//:VStack
+                        
+                    }//:HStack
+                    .padding(.vertical)
+                    
+                    HStack {
+                        VStack {
+                            HStack(alignment: .top) {
+                                Image(systemName: "person.fill")
+                                    .font(.system(size: 25))
+                                Text("\(project.nbContributeurs)")
+                                    .fontWeight(.bold)
+                                    .font(.system(size: 25))
+                                    .padding(.leading, -8.0)
+                            }
+                            Text("Contributeurs")
+                                .font(.system(size: 14))
+                        }
                         
                         Spacer()
-                    }
+                        VStack {
+                            HStack {
+                                Image(systemName: "clock.arrow.circlepath")
+                                    .font(.system(size: 25))
+                                Text("\(project.nbDaysLeftToProject)")
+                                    .fontWeight(.bold)
+                                    .font(.system(size: 25))
+                                    .padding(.leading, -8.0)
+                            }
+                            Text("Jours restants")
+                                .font(.system(size: 14))
+                        }
+                        
+                        Spacer()
+                        VStack {
+                            HStack {
+                                Image(systemName: "eurosign.circle")
+                                    .font(.system(size: 25))
+                                Text("\(project.budget)€")
+                                    .fontWeight(.bold)
+                                    .font(.system(size: 25))
+                                    .padding(.leading, -9.0)
+                            }
+                            Text("Budget")
+                                .font(.system(size: 14))
+                        }
+                        
+                    }//:HStack
                     .padding(.vertical)
-                }
-                                
-                Spacer()
-                
-            }//:VStack
-            .padding(.horizontal)
-            .foregroundColor(.white)
-            
+                    
+                    VStack {
+                        Text(project.description_project)
+                            .font(.body)
+                            .fontWeight(.semibold)
+                            .foregroundColor(Color.white)
+                            .multilineTextAlignment(.leading)
+                            .lineLimit(10)
+                        
+                    }
+                    
+                    if (canContribute()) {
+                        HStack {
+                            Spacer()
+                            Button(action: {
+                                contribute()
+                            }, label: {
+                                Text("Contribuer")
+                                    .font(.system(size: 25))
+                                    .frame(width: 200)
+                                    .padding(8.0)
+                                    .background(Color("progressBarColor"))
+                                    .cornerRadius(8)
+                            })
+                            
+                            Spacer()
+                        }
+                        .padding(.vertical)
+                    }
+                    
+                    Spacer()
+                    
+                }//:VStack
+                .padding(.horizontal)
+                .foregroundColor(.white)
+            }
         }//:ZStack
         .navigationBarTitle(project.title)
         
@@ -214,7 +227,7 @@ struct ProjectDetailView_Previews: PreviewProvider {
         project1.category = CategoryProject.energie.rawValue
         project1.created_date = Date()
         project1.finished_date = Date().addingTimeInterval(TimeInterval(86400 * 6)) // Exemple 6J
-
+        
         
         // Le user créateur du projet
         let user1 = User(context: context)
@@ -232,10 +245,11 @@ struct ProjectDetailView_Previews: PreviewProvider {
         
         project1.addToContributions(contribution1)
         project1.addToContributions(contribution2)
-
+        
         
         return ProjectDetailView(project: project1)
             .environment(\.managedObjectContext, context)
             .environmentObject(currentUser)
     }
 }
+

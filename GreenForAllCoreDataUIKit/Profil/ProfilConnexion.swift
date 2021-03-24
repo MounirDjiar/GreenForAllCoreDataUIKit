@@ -27,9 +27,7 @@ struct ProfilConnexion: View {
     }
     
     var body: some View {
-        
-        NavigationView {
-            
+                
             ZStack {
                 Color("bgGreen")
                     .ignoresSafeArea()
@@ -58,14 +56,16 @@ struct ProfilConnexion: View {
 //                        })
                         
                         
-                        Button(action: {}, label: {
-                            Text("Se Connecter")
-                                .fontWeight(.bold)
-                        })
-                        .padding(.horizontal, 100)
-                        .padding()
-                        .background(Color("bgDarkGreen"))
-                        .cornerRadius(10)
+                        NavigationLink(
+                            destination: ProjectListView(),
+                            label: {
+                                Text("Se Connecter")
+                                    .fontWeight(.bold)
+                            })
+                            .padding(.horizontal, 100)
+                            .padding()
+                            .background(Color("bgDarkGreen"))
+                            .cornerRadius(10)
                         
                         Button(action: {
                            showProfilCreate = true
@@ -88,7 +88,6 @@ struct ProfilConnexion: View {
                 ProfilCreate(showProfilCreate: $showProfilCreate)
                     .environment(\.managedObjectContext, managedObjectContext)
             })
-        }
         
     }}
 

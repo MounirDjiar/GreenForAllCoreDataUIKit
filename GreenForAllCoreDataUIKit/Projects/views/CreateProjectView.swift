@@ -69,7 +69,7 @@ struct CreateProjectView: View {
     @State var desc: String = ""
     @State var budget: String = ""
     @State var urlvideo: String = ""
-    @State var urlimg: URL? = URL(string: "google.com")
+    @State var urlimg: URL? = URL(string: "")
     @State var duree: String = ""
     
     
@@ -114,48 +114,49 @@ struct CreateProjectView: View {
                                     .padding(.leading, -10)
                                 Spacer()
                             }
-                            ScrollView (.horizontal) {
-                                HStack {
-                                    ForEach (CategoryProject.allCases, id: \.self) { categoryProject in
-                                        Button(action: {
-                                            if (selectedCategory == categoryProject){
-                                                //selectedCategory = CategoryProject.none
-                                            }
-                                            else{
-                                                selectedCategory = categoryProject
-                                            }
-                                        }, label: {
-                                            if (selectedCategory == categoryProject)
-                                            {
-                                                Image("\(categoryProject.categoryProjectImage)")
-                                                    .resizable()
-                                                    .frame(width: 125, height: 125)
-                                                    .cornerRadius(5)
-                                                    .border(Color.green, width: 5)
-                                            }
-                                            else
-                                            {
-                                                Image("\(categoryProject.categoryProjectImage)")
-                                                    .resizable()
-                                                    .frame(width: 125, height: 125)
-                                                    .cornerRadius(5)
-                                                    .overlay(
-                                                        VStack {
-                                                            Spacer()
-                                                            Text(categoryProject.categoryProjectTitle)
-                                                                .fontWeight(.heavy)
-                                                                .foregroundColor(Color.white)
-                                                            Text("")
-                                                                .frame(height: 2)
-                                                            
-                                                        }
-                                                    )
-                                            }
-                                        })
-                                        
-                                    }
+                            HStack {
+//                                    Spacer()
+                                ForEach (CategoryProject.allCases, id: \.self) { categoryProject in
+                                    Button(action: {
+                                        if (selectedCategory == categoryProject){
+                                            //selectedCategory = CategoryProject.none
+                                        }
+                                        else{
+                                            selectedCategory = categoryProject
+                                        }
+                                    }, label: {
+                                        if (selectedCategory == categoryProject)
+                                        {
+                                            Image("\(categoryProject.categoryProjectImage)")
+                                                .resizable()
+                                                .frame(width: 100, height: 100)
+                                                .cornerRadius(5)
+                                                .border(Color.green, width: 5)
+                                        }
+                                        else
+                                        {
+                                            Image("\(categoryProject.categoryProjectImage)")
+                                                .resizable()
+                                                .frame(width: 100, height: 100)
+                                                .cornerRadius(5)
+                                                .overlay(
+                                                    VStack {
+                                                        Spacer()
+                                                        Text(categoryProject.categoryProjectTitle)
+                                                            .fontWeight(.heavy)
+                                                            .foregroundColor(Color.white)
+                                                        Text("")
+                                                            .frame(height: 2)
+                                                        
+                                                    }
+                                                )
+                                        }
+                                    })
+                                    
                                 }
-                            }.padding(.horizontal, -10)
+//                                    Spacer()
+                            }.padding(.bottom, 10)
+
                         }
                     }
                     
@@ -271,12 +272,25 @@ extension CreateProjectView {
         newProject.title = title
         newProject.description_project = desc
         newProject.budget = Int64(budget) ?? 0
-        newProject.picture = "\(urlimg)"
+        newProject.picture = "CP-" + title + ".png"
         newProject.video = urlvideo
         newProject.created_date = Date()
         newProject.finished_date = Date().addingTimeInterval(TimeInterval(86400 * (Int(duree) ?? 0)))
         newProject.category = selectedCategory.rawValue
         newProject.user = currentUser.user
+        
+        if let timage = inputImage {
+            if let tdata = timage.pngData() {
+                urlimg = getDocumentsDirectory().appendingPathComponent("CP-" + title + ".png")
+                do {
+                    try tdata.write(to: urlimg!)
+                    print("file saved")
+                } catch {
+                    print("error saving file:", error)
+                }
+//                                        try? tdata.write(to: urlimg!)
+            }
+        }
         
         // On save la nouvelle instance dans le MOC
         do {
@@ -301,6 +315,3 @@ struct CreateProjetView_Previews: PreviewProvider {
             .environmentObject(currentUser)
     }
 }
-
-
-

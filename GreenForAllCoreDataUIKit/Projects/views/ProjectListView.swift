@@ -99,6 +99,7 @@ extension ProjectListView {
                     label: {
                         ProjectRow(project: project)
                     })
+                    .environment(\.managedObjectContext, managedObjectContext)
             }//: ForEach
         }//:ScrollView
     }

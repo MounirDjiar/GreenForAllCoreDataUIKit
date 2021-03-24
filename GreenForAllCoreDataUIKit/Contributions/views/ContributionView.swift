@@ -97,12 +97,12 @@ extension ContributionView {
         if let montant = (Int(amount)) {
             let newContribution = Contribution(context: managedObjectContext)
             newContribution.amount = Int64(montant)
-            project.addToContributions(newContribution)
             newContribution.user = currentUser.user
+            project.addToContributions(newContribution)
             
             // On save la nouvelle instance dans le MOC
             do {
-                print(montant)
+                print(newContribution.description)
                 
                 try managedObjectContext.save()
             } catch {

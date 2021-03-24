@@ -6,14 +6,30 @@
 //
 
 import SwiftUI
+import UIKit
+
+var documentsUrl: URL {
+    return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+}
+
+private func load(fileName: String) -> UIImage? {
+    let fileURL = documentsUrl.appendingPathComponent(fileName)
+    do {
+        let imageData = try Data(contentsOf: fileURL)
+        return UIImage(data: imageData)
+    } catch {
+        print("Error loading image : \(error)")
+    }
+    return nil
+}
 
 struct ProjectRow: View {
     
-    let project:Project
+    @ObservedObject var project:Project
     
     var body: some View {
         HStack {
-            Image(project.picture)
+            Image(uiImage: (load(fileName: project.picture) ?? UIImage(named: "p1"))!)
                 .resizable()
                 .scaledToFill()
                 .cornerRadius(8.0)
@@ -25,12 +41,17 @@ struct ProjectRow: View {
                 Text(project.title)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.leading)
+                    .lineLimit(1)
+                Text("\(project.user?.firstname ?? "default") \(project.user?.lastname ?? "default")")
+                    .font(.footnote)
+                    .fontWeight(.medium)
+                    .multilineTextAlignment(.leading)
                     .lineLimit(2)
                 
                 Spacer()
                 
                 HStack {
-                    ProgressBar(value: 0.3, filColor: Color("bgGreen"))
+                    ProgressBar(value: project.progressContributions, filColor: Color("bgGreen"))
                         .frame(height: 20)
                 }//:HStack
                 
@@ -106,3 +127,8 @@ struct ProjectRow_Previews: PreviewProvider {
         return ProjectRow(project: project1)
     }
 }
+
+
+
+
+

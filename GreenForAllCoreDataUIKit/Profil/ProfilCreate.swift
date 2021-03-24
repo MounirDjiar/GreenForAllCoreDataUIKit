@@ -50,10 +50,10 @@ struct ProfilCreate: View {
                 VStack{
                     Form {
                         Section{
-                            TextField("Nom", text: $lastname)
+                            TextField("Prénom", text: $firstname)
                         }
                         Section{
-                            TextField("Prénom", text: $firstname)
+                            TextField("Nom", text: $lastname)
                         }
                         Section{
                             TextField("Email", text: $email)

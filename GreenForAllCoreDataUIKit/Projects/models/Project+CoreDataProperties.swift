@@ -62,7 +62,10 @@ extension Project {
     
     // Montant total des contributions à ce projet
     var totalContributions : Int {
-        2000
+        if let contributions = contributions as? Set<Contribution> {
+          return  Int(contributions.reduce(0, {$0 + $1.amount}))
+        }
+        return 0
     }
     
     // Progression contribution par rapport au budget
