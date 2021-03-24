@@ -78,7 +78,8 @@ struct MarketListJson: View {
                 Text(now, style: .date).padding()
                 
                 Toggle(isOn: $showFavoritesOnly) {
-                    Text("Favorites only")
+                    //Text("Favorites only")
+                    Text("Mes favoris")
                 }
                 .padding(.horizontal)
                 
@@ -104,10 +105,11 @@ struct MarketListJson: View {
             }
         
         .navigationBarTitle(Text("Marché vert"))
+        
         .foregroundColor(.white)
 
         }
-        
+        .accentColor(.white)
         .environmentObject(modelData)
     }
 }

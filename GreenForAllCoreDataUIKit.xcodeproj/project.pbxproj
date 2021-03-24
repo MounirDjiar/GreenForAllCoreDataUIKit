@@ -340,7 +340,6 @@
 				BFF39082260AA575006AFCB5 /* ViewAPI */,
 				BFF3908B260AA575006AFCB5 /* ViewJSON */,
 				BFF39086260AA575006AFCB5 /* graph */,
-				BFF3908A260AA575006AFCB5 /* Bundle_Decodable.swift */,
 				BFF39094260AA575006AFCB5 /* json */,
 				BFF3909F260AA575006AFCB5 /* Model */,
 			);
@@ -350,6 +349,7 @@
 		BFF3907E260AA575006AFCB5 /* tools */ = {
 			isa = PBXGroup;
 			children = (
+				BFF3908A260AA575006AFCB5 /* Bundle_Decodable.swift */,
 				BFF3907F260AA575006AFCB5 /* SearchBarYoko.swift */,
 				BFF39080260AA575006AFCB5 /* FavoriteButton.swift */,
 				BFF39081260AA575006AFCB5 /* Color.swift */,
