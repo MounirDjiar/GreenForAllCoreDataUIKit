@@ -26,7 +26,7 @@ class CurrentUser: ObservableObject {
         request.fetchLimit = 1
         
         if let result = try? context.fetch(request) {
-            user = (result as [User]).first
+            user = (result as [User]).last
         }
     }
 }

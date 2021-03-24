@@ -183,8 +183,7 @@ extension ProjectDetailView {
     }
     
     private func canContribute() -> Bool {
-        print(currentUser.user?.firstname)
-        print(project.user?.firstname)
+        
         if (currentUser.user != project.user) {
             return true
         }

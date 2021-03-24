@@ -73,7 +73,9 @@ extension ProjectListView {
     private var addButton : some View {
         Button(action: {
             
+            // Trick to add different user
             //addUser()
+            
             showAddProjectView = true
             
         }, label: {

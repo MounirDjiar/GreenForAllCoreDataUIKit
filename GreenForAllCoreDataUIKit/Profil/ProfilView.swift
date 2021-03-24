@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ProfilView: View {
     
-    let profil: Profil = Profil(firstname: "Baptiste", lastname: "Moulin", image: "Profil", mail: "baptiste.moulin@gmail.com", password: "password")
+    // Je récupère le current user depuis l'environement
+    @EnvironmentObject var profil: CurrentUser
     
     var body: some View {
 

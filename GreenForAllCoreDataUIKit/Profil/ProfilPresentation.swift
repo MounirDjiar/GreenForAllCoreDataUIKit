@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProfilPresentation: View {
     
-    let profil: Profil
+    let profil: CurrentUser
     
     var body: some View {
         VStack{
@@ -21,16 +21,16 @@ struct ProfilPresentation: View {
                     .frame(maxWidth: 150)
                 
                 VStack(alignment: .leading){
-                    Text(profil.firstname)
+                    Text("\(profil.user?.firstname ?? "firstname")")
                         .fontWeight(.bold)
                         .font(.system(size:27))
                     
-                    Text(profil.lastname)
+                    Text("\(profil.user?.lastname ?? "lastname")")
                         .fontWeight(.bold)
                         .font(.system(size:25))
                         .opacity(0.7)
                     
-                    Text(profil.mail)
+                    Text("\(profil.user?.email ?? "email")")
                         .font(.system(size:10))
                     Spacer()
                     Text("Total investit")
@@ -48,8 +48,8 @@ struct ProfilPresentation: View {
     }
 }
 
-struct ProfilPresentation_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfilPresentation( profil: Profil(firstname: "Baptiste", lastname: "Moulin", image: "Profil", mail: "baptiste.moulin@gmail.com", password: "password"))
-    }
-}
+//struct ProfilPresentation_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ProfilPresentation( profil: Profil(firstname: "Baptiste", lastname: "Moulin", image: "Profil", mail: "baptiste.moulin@gmail.com", password: "password"))
+//    }
+//}

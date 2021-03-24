@@ -243,7 +243,7 @@ extension CreateProjectView {
     private var addButton: some View {
         Button("Créer") {
             
-            if title == "" || desc == "" || Int(budget) ?? 0 == 0 || urlimg == nil || Int(duree) ?? 0 == 0 {
+            if title == "" || desc == "" || Int(budget) ?? 0 == 0 || urlimg == nil || (Int(duree) ?? 0 == 0) {
                 showingAlert = true
             }
             else {
