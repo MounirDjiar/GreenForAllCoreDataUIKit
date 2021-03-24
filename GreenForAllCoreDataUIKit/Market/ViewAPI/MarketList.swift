@@ -1,24 +1,21 @@
 //
-//  MarketListJson.swift
+//  MarketList.swift
 //  Green4all
 //
-//  Created by vincent schmitt on 23/03/2021.
+//  Created by yoko on 21/03/2021.
 //
 
 import SwiftUI
 
-struct MarketListJson: View {
+struct MarketList: View {
     
-    /* to load .json file
-    let IBMstockData = Bundle.main.decode("IBM2021-03-22.json")
-    let lastRefreshed = "2021-03-22"
-    */
-    
-    @ObservedObject var stockAAPL = StockData(stockSymbol: "AAPL")
-    @ObservedObject var stockIBM = StockData(stockSymbol: "IBM")
-    @ObservedObject var stockMSFT = StockData(stockSymbol: "MSFT")
-    @EnvironmentObject var modelData: ModelData
     @State private var showFavoritesOnly = false
+    
+    //@ObservedObject var stocks: Stocks
+    @ObservedObject var stockAAPL = Stocks(stockSymbol: "AAPL")
+    @ObservedObject var stockIBM = Stocks(stockSymbol: "IBM")
+    @ObservedObject var stockMSFT = Stocks(stockSymbol: "MSFT")
+    @EnvironmentObject var modelData: ModelData
     
     init() {
         UITableView.appearance().backgroundColor = uicolorBackground
@@ -28,13 +25,13 @@ struct MarketListJson: View {
         navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         }
     
-    private func assign(item: String) -> StockData {
+    private func assign(item: String) -> Stocks {
         switch(item) {
         case "AAPL": return stockAAPL
         case "IBM": return stockIBM
-        //case "MSFT": return stockMSFT
+        case "MSFT": return stockMSFT
         default:
-            return StockData(stockSymbol: "")
+            return Stocks(stockSymbol: "")
         }
     }
     
@@ -51,7 +48,7 @@ struct MarketListJson: View {
     }
     
     @State var searchText: String = ""
-
+    
     
     var body: some View {
         NavigationView {
@@ -61,7 +58,7 @@ struct MarketListJson: View {
         
             VStack(alignment: .leading) {
                 // SearchBar
-                SearchBar(searchText: $searchText)
+                SearchBarYoko(searchText: $searchText)
                 
                 Text(now, style: .date).padding()
                 
@@ -99,13 +96,16 @@ struct MarketListJson: View {
     }
 }
 
-struct MarketListJson_Previews: PreviewProvider {
+struct MarketList_Previews: PreviewProvider {
+
     static var previews: some View {
-        MarketListJson().environmentObject(ModelData())
+        MarketList().environmentObject(ModelData())
+
+        //MarketList(stocks: Stocks).environmentObject(ModelData())
     }
 }
 
-extension MarketListJson {
+extension MarketList {
     private func AssetDataRow(element: AssetInfo) -> some View {
         //@EnvironmentObject let item: AssetInfo
         
@@ -151,7 +151,7 @@ extension MarketListJson {
     }
 }
 
-extension MarketListJson {
+extension MarketList {
     private func change(element: AssetInfo) -> some View {
         
         let open = Double(assign(item: element.symbol).open) ?? 0.0 //Double(stockAAPL.open) ?? 0

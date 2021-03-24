@@ -2,7 +2,7 @@
 //  CombineJSONStockPrice.swift
 //  Green4all
 //
-//  Created by vincent schmitt on 23/03/2021.
+//  Created by yoko on 23/03/2021.
 //
 
 import Foundation
@@ -11,7 +11,7 @@ import Combine
 class StockData : ObservableObject {
     
     @Published var prices = [Double]()
-    @Published var date = ""  // added by yoko
+    //@Published var date = ""  // added by yoko
     @Published var currentPrice = "...."
     @Published var open = ""
     @Published var close = ""
@@ -36,29 +36,17 @@ class StockData : ObservableObject {
     }
     
     func fetchStockPrice(){
-        /*
-        let urlBase =
-            "http://localhost:8888/test/green4all/IBMStockData.json"
-            //"http://www.vinsfinsmotohama.shop/test/green4all/IBMStockData.json" //"https://www.alphavantage.co/query?function=\(stockFunction)&symbol=\(stockSymbol)&apikey=\(apiKey)&datatype=json" //"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=AAPL&apikey=2OZPW2NW0AT07VNL&datatype=json"
-        
-        */
-        /*
-        URLSession.shared.dataTaskPublisher(for: URL(string: "\(urlBase)")!)
-            .map{output in
-                
-                return output.data
-        }
-        .decode(type: StocksDaily.self, decoder: JSONDecoder())
-        .sink(receiveCompletion: {_ in
-            print("completed")
-        }, receiveValue: { value in
-        */
+
             var stockPrices = [Double]()
         
         let lastRefreshed = "2021-03-22"
-        let myStockDataJsonFile = stockSymbol + lastRefreshed
+        let myStockDataJsonFile = stockSymbol + lastRefreshed + ".json"
+        print(myStockDataJsonFile)
+        
         //let myStockData = Bundle.main.decode("IBM2021-03-22.json")
         let value = Bundle.main.decode(myStockDataJsonFile)
+        
+        
         print("load completed. value.timeSeriesDaily.count = ")
         print(value.timeSeriesDaily?.count)//IBMstockData.timeSeriesDaily?[lastRefreshed]?.open ?? "none")
             let orderedDates =  value.timeSeriesDaily?.sorted{
@@ -79,6 +67,7 @@ class StockData : ObservableObject {
             
             DispatchQueue.main.async{
                 self.prices = stockPrices
+                
                 self.currentPrice = stockData.last?.value.close ?? "..."
                 self.open = stockData.last?.value.open ?? "..."
                 self.close = stockData.last?.value.close ?? "..."

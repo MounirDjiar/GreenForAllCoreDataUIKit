@@ -37,7 +37,7 @@ struct TabBar: View {
                 Grid()
                     .tag(tabItems[1])
                 
-                MarketList()
+                MarketListJson()
                     .tag(tabItems[2])
                 
                 ProfilView()

@@ -41,24 +41,10 @@ struct GuideDetail1: View {
  
                 ///////////////////////// search bar \\\\\\\\\\\\\\\\\\\\\\\
                 VStack {
-                    HStack(spacing: 15){
-                        Image(systemName: "magnifyingglass")
-                            .font(.system(size: 23, weight: .bold))
-                            .foregroundColor(.white).opacity(0.4)
-                        TextField("Recherche", text: $searchQuery).foregroundColor(.white)
-                    }
-                    .padding(.vertical, 10)
-                    .padding(.horizontal)
-                    .background(Color.primary.opacity(0.05))
-                    .cornerRadius(8)
-                    .padding(.horizontal)
-                    
+                    SearchBar(searchText: $searchQuery)
                 }
                 .offset(y: -110)
-
             }
-
-            
             
             ///////////////////////// scroll view \\\\\\\\\\\\\\\\\\\\\\\
             

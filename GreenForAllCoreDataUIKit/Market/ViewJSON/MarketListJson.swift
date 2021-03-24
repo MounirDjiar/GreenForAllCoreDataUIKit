@@ -1,21 +1,29 @@
 //
-//  MarketList.swift
+//  MarketListJson.swift
 //  Green4all
 //
-//  Created by yoko on 21/03/2021.
+//  Created by vincent schmitt on 23/03/2021.
 //
 
 import SwiftUI
 
-struct MarketList: View {
+struct MarketListJson: View {
+
+    @StateObject var stockGRNB = StockData(stockSymbol: "GRNB")
+    @StateObject var stockMGGAX = StockData(stockSymbol: "MGGAX")
+    @StateObject var stockCGAFX = StockData(stockSymbol: "CGAFX")
+    @StateObject var stockBGRN = StockData(stockSymbol: "BGRN")
+    @StateObject var stockIQQHDE = StockData(stockSymbol: "IQQH.DE")
+    @StateObject var stockQCLN = StockData(stockSymbol: "QCLN")
+    @StateObject var stockPBW =  StockData(stockSymbol: "PBW")
+    @StateObject var stockAAPL = StockData(stockSymbol: "AAPL")
+    @StateObject var stockIBM = StockData(stockSymbol: "IBM")
+    @StateObject var stockMSFT = StockData(stockSymbol: "MSFT")
+    
+    //@EnvironmentObject var modelData: ModelData
+    @StateObject var modelData = ModelData()
     
     @State private var showFavoritesOnly = false
-    
-    //@ObservedObject var stocks: Stocks
-    @ObservedObject var stockAAPL = Stocks(stockSymbol: "AAPL")
-    @ObservedObject var stockIBM = Stocks(stockSymbol: "IBM")
-    @ObservedObject var stockMSFT = Stocks(stockSymbol: "MSFT")
-    @EnvironmentObject var modelData: ModelData
     
     init() {
         UITableView.appearance().backgroundColor = uicolorBackground
@@ -25,13 +33,20 @@ struct MarketList: View {
         navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         }
     
-    private func assign(item: String) -> Stocks {
+    private func assign(item: String) -> StockData {
         switch(item) {
+        case "GRNB": return stockGRNB
+        case "MGGAX": return stockMGGAX
+        case "CGAFX": return stockCGAFX
+        case "BGRN": return stockBGRN
+        case "IQQH.DE": return stockIQQHDE
+        case "QCLN": return stockQCLN
+        case "PBW": return stockPBW
         case "AAPL": return stockAAPL
         case "IBM": return stockIBM
-        //case "MSFT": return stockMSFT
+        case "MSFT": return stockMSFT
         default:
-            return Stocks(stockSymbol: "")
+            return StockData(stockSymbol: "")
         }
     }
     
@@ -48,7 +63,7 @@ struct MarketList: View {
     }
     
     @State var searchText: String = ""
-    
+
     
     var body: some View {
         NavigationView {
@@ -63,7 +78,8 @@ struct MarketList: View {
                 Text(now, style: .date).padding()
                 
                 Toggle(isOn: $showFavoritesOnly) {
-                    Text("Favorites only")
+                    //Text("Favorites only")
+                    Text("Mes favoris")
                 }
                 .padding(.horizontal)
                 
@@ -74,13 +90,12 @@ struct MarketList: View {
                         
                         //ForEach(modelData.assetInfos) { element in
                     //ForEach(filteredItem) { element in
-                        NavigationLink( destination: //MarketAssetDataDetailView(item: element, stocks: assign(item: element.symbol)),
-                            MarketDetail(assetInfo: element),
-                            //MarketDetail(assetInfo: searchedItem[index]),
+                        NavigationLink( destination:
+                            MarketDetailJson(stockGRNB: stockGRNB, stockMGGAX: stockMGGAX, stockCGAFX: stockCGAFX, stockBGRN: stockBGRN, stockIQQHDE: stockIQQHDE, stockQCLN: stockQCLN, stockPBW: stockPBW, stockAAPL: stockAAPL, stockIBM: stockIBM, stockMSFT: stockMSFT,  assetInfo: element),
+                            
                         label: {
-                            //Text(element.symbol)
+                            
                             AssetDataRow(element:  element)
-                            //AssetDataRow(element:  searchedItem[index])
                                 .background(colorTranparent)//(index  % 2 == 0) ? colorTranparent : colorTranparentMedium)//.listRowBackground((index  % 2 == 0) ? Color(.systemBlue) : Color(.red))
                             
                         })//.listRowBackground((index  % 2 == 0) ? Color(.systemBlue) : Color(.red))
@@ -90,29 +105,30 @@ struct MarketList: View {
             }
         
         .navigationBarTitle(Text("Marché vert"))
+        
         .foregroundColor(.white)
 
         }
+        .accentColor(.white)
+        .environmentObject(modelData)
     }
 }
 
-struct MarketList_Previews: PreviewProvider {
-
+struct MarketListJson_Previews: PreviewProvider {
     static var previews: some View {
-        MarketList().environmentObject(ModelData())
-
-        //MarketList(stocks: Stocks).environmentObject(ModelData())
+        MarketListJson().environmentObject(ModelData()).environmentObject(StockData(stockSymbol: ""))
+        
     }
 }
 
-extension MarketList {
+extension MarketListJson {
     private func AssetDataRow(element: AssetInfo) -> some View {
         //@EnvironmentObject let item: AssetInfo
         
         //let myStock = stock(item: element.symbol)
         
         return
-            
+         
             HStack{
             VStack(alignment: .leading) {
                 Text(element.symbol).font(.title2).fontWeight(.bold)
@@ -146,18 +162,19 @@ extension MarketList {
 
             Text(">")
             //Image(systemName: "arrowtriangle.right")
+
         }.padding(.all, 5.0)
             
     }
 }
 
-extension MarketList {
+extension MarketListJson {
     private func change(element: AssetInfo) -> some View {
         
         let open = Double(assign(item: element.symbol).open) ?? 0.0 //Double(stockAAPL.open) ?? 0
         let currentPrice = Double(assign(item: element.symbol).currentPrice) ?? 0.0 //Double(stockAAPL.open) ?? 0
         let close = Double(assign(item: element.symbol).close) ?? 0.0//Double(stockAAPL.close) ?? 0
-        let priceChange = currentPrice - close
+        let priceChange = currentPrice - open
         let percentChange = priceChange / currentPrice * 100
         
     let colorChange = priceChange >= 0 ? Color.green : Color.red
