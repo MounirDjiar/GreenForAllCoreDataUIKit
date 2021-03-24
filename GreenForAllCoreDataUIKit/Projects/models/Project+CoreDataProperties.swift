@@ -52,7 +52,7 @@ extension Project {
     
     // Jour restants au projets
     var nbDaysLeftToProject :  Int {
-        Int(Date().distance(to: self.finished_date) / 86400)
+        return Int(ceil(Date().distance(to: self.finished_date) / 86400))
     }
     
     // Nombre de contributeurs

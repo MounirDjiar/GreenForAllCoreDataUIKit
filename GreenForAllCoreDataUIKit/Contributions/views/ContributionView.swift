@@ -13,9 +13,9 @@ struct ContributionView: View {
     @Environment(\.managedObjectContext) var managedObjectContext
     
     @Binding var showContributionView:Bool
-    @State var amount:Int64 = 0
+    @State var amount:String = ""
     
-    //let project_id:Int
+    var project:Project
     
     var body: some View {
         
@@ -52,7 +52,7 @@ struct ContributionView: View {
                         .foregroundColor(.white)
                 }
                 Form {
-                    TextField("Montant", value: $amount, formatter: NumberFormatter()).keyboardType(.numberPad)
+                    TextField("Montant", text: $amount).keyboardType(.numberPad)
                         .multilineTextAlignment(.center)
                 }
                 .frame(width: 200, height: 100, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
@@ -72,7 +72,6 @@ struct ContributionView: View {
                     
                     Button("Valider") {
                         saveAmount()
-                        showContributionView = false
                     }
                     .font(.title)
                     .frame(width: 100)
@@ -89,15 +88,22 @@ struct ContributionView: View {
 }
 
 extension ContributionView {
+    
     private func saveAmount() {
-        
-        
-        // On save la nouvelle instance dans le MOC
-        do {
-            try managedObjectContext.save()
-        } catch {
-            print(error)
+       
+        if let montant = (Int(amount)) {
+            let newContribution = Contribution(context: managedObjectContext)
+            newContribution.amount = Int64(montant)
+            project.addToContributions(newContribution)
+            
+            // On save la nouvelle instance dans le MOC
+            do {
+                try managedObjectContext.save()
+            } catch {
+                print(error)
+            }
         }
+        showContributionView = false
     }
 }
 
@@ -108,7 +114,7 @@ struct ContributionView_Previews: PreviewProvider {
         // On récupère le contexte
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
-        return ContributionView(showContributionView: .constant(true), project_id: UUID())
+        return ContributionView(showContributionView: .constant(true))
             .environment(\.managedObjectContext, context)
 
     }

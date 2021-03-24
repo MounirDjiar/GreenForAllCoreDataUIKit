@@ -13,7 +13,7 @@ struct ImagePicker: UIViewControllerRepresentable {
     
     class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
         let parent: ImagePicker
-
+        
         init(_ parent: ImagePicker) {
             self.parent = parent
         }
@@ -22,14 +22,14 @@ struct ImagePicker: UIViewControllerRepresentable {
             if let uiImage = info[.originalImage] as? UIImage {
                 parent.image = uiImage
             }
-
+            
             parent.presentationMode.wrappedValue.dismiss()
         }
     }
     
     @Environment(\.presentationMode) var presentationMode
     @Binding var image: UIImage?
-
+    
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
@@ -39,9 +39,9 @@ struct ImagePicker: UIViewControllerRepresentable {
         picker.delegate = context.coordinator
         return picker
     }
-
+    
     func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePicker>) {
-
+        
     }
 }
 
@@ -57,7 +57,7 @@ struct CreateProjectView: View {
     
     // Je récupère le current user depuis l'environement
     @EnvironmentObject var currentUser: CurrentUser
-
+    
     @Binding var showCreateProjectView:Bool
     @State var showingAlert = false
     
@@ -103,7 +103,7 @@ struct CreateProjectView: View {
             
             ZStack {
                 Color("bgGreen").ignoresSafeArea()
-    
+                
                 Form {
                     TextField("Titre", text: $title)
                     Section {
@@ -206,12 +206,12 @@ struct CreateProjectView: View {
                         }
                     }
                     .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
-                                            ImagePicker(image: self.$inputImage)
-                                        }
-                    
-                    Section {
-                        TextField("URL Vidéo (optionnel)", text: $urlvideo)
+                        ImagePicker(image: self.$inputImage)
                     }
+                    
+                    //                    Section {
+                    //                        TextField("URL Vidéo (optionnel)", text: $urlvideo)
+                    //                    }
                     
                 }// :Form
                 .disableAutocorrection(true)

@@ -63,32 +63,17 @@ struct ProjectListView: View {
                     .environment(\.managedObjectContext, managedObjectContext)
             })
         } //: NAVIGATION
+        .accentColor(.white)
     }
 }
 
 extension ProjectListView {
     
-    func saveFirstUser() {
-        // On crée une nouvelle instance Projet
-        let newUser = User(context: managedObjectContext)
-        
-        newUser.firstname = "Mounir"
-        newUser.lastname = "DJIAR"
-        newUser.email = "mounir@djiar.com"
-        
-        // On save la nouvelle instance dans le MOC
-        do {
-            try managedObjectContext.save()
-        } catch {
-            print(error)
-        }
-    }
-    
     // Bouton Add de la NavBar
     private var addButton : some View {
         Button(action: {
-            //saveFirstUser()
             
+            //addUser()
             showAddProjectView = true
             
         }, label: {
@@ -115,9 +100,27 @@ extension ProjectListView {
             }//: ForEach
         }//:ScrollView
     }
-    
-    
 }
+
+extension ProjectListView {
+    func addUser() {
+        // On crée une nouvelle instance Projet
+        let newUser = User(context: managedObjectContext)
+        
+        newUser.firstname = "Batiste"
+        newUser.lastname = "Mounlin"
+        newUser.email = "batiste@moulin.fr"
+        
+        // On save la nouvelle instance dans le MOC
+        do {
+            print(newUser.firstname)
+            try managedObjectContext.save()
+        } catch {
+            print(error)
+        }
+    }
+}
+
 
 struct ProjectListView_Previews: PreviewProvider {
     static var previews: some View {

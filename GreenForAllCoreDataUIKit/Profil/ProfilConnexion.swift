@@ -9,8 +9,13 @@ import SwiftUI
 
 struct ProfilConnexion: View {
     
+    // On récupère le Managed Object Contexte pour le donner à la sheet
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
+    
     @State var mail: String = ""
     @State var password: String = ""
+    @State var showProfilCreate:Bool = false
     
     
     init(){
@@ -23,22 +28,21 @@ struct ProfilConnexion: View {
     
     var body: some View {
         
-        NavigationView{
+        NavigationView {
             
-            ZStack{
+            ZStack {
                 Color("bgGreen")
                     .ignoresSafeArea()
                 
                 VStack{
                     Form {
                         Section{
-                            TextField("Émail", text: $mail)
+                            TextField("Email", text: $mail)
                         }
-                        Section{
-                            SecureField("Mot de Passe", text: $password)
-                            
-                        }
-                        
+//                        Section{
+//                            SecureField("Mot de Passe", text: $password)
+//                            
+//                        }
                     }
                     .foregroundColor(Color("bgDarkGreen"))
                     .frame(maxHeight: 170)
@@ -48,10 +52,10 @@ struct ProfilConnexion: View {
                      
                     VStack( spacing: 100){
                         
-                        Button(action: {}, label: {
-                            Text("Mot de Passe oublié ?")
-                                .fontWeight(.bold)
-                        })
+//                        Button(action: {}, label: {
+//                            Text("Mot de Passe oublié ?")
+//                                .fontWeight(.bold)
+//                        })
                         
                         
                         Button(action: {}, label: {
@@ -63,7 +67,9 @@ struct ProfilConnexion: View {
                         .background(Color("bgDarkGreen"))
                         .cornerRadius(10)
                         
-                        Button(action: {}, label: {
+                        Button(action: {
+                           showProfilCreate = true
+                        }, label: {
                             HStack {
                                 Text("Pas de compte ?" )
                                 Text("Inscrivez-vous")
@@ -71,13 +77,17 @@ struct ProfilConnexion: View {
                             }
                         })
                     }
-                    
                 }
                 
             }
             .foregroundColor(.white)
             .navigationBarTitle("Connexion" , displayMode: .large)
             
+            // La modale addProject
+            .sheet(isPresented: $showProfilCreate, content: {
+                ProfilCreate(showProfilCreate: $showProfilCreate)
+                    .environment(\.managedObjectContext, managedObjectContext)
+            })
         }
         
     }}

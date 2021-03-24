@@ -21,10 +21,27 @@ struct ProjectDetailView: View {
     
     var body: some View {
         
-        //Use this if NavigationBarTitle is with Large Font
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        // Permet de supprimer la couleur du background par defaut
+        UITableView.appearance().backgroundColor = .clear
         
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white]
+        // Met un background color
+        UINavigationBar.appearance().backgroundColor = UIColor(Color("bgGreen"))
+        
+        // Couleur et fontWeight du titre de la NavBar
+        let attrs = [
+            NSAttributedString.Key.foregroundColor: UIColor(Color.white),
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.bold)
+        ]
+        UINavigationBar.appearance().titleTextAttributes = attrs
+        
+        // Couleur de la navBarItems
+        UINavigationBar.appearance().tintColor = .white
+        
+        // Couleur du background de la navBar
+        UINavigationBar.appearance().barTintColor = UIColor(Color("bgGreen"))
+        
+        // Passer a false si on ne veut que la couleur de la navBar soit translucide
+        //UINavigationBar.appearance().isTranslucent = false
         
         // NAVIGATION
         return ZStack {
@@ -151,9 +168,10 @@ struct ProjectDetailView: View {
         }//:ZStack
         .navigationBarTitle(project.title)
         
+        
         // La modale pour la contribution
         .sheet(isPresented: $showContributionView, content: {
-            ContributionView(showContributionView: $showContributionView)
+            ContributionView(showContributionView: $showContributionView, project: project)
                 .environment(\.managedObjectContext, managedObjectContext)
         })
     }
@@ -165,8 +183,13 @@ extension ProjectDetailView {
     }
     
     private func canContribute() -> Bool {
-        //(currentUser.user == project.user)
-        return true
+        print(currentUser.user?.firstname)
+        print(project.user?.firstname)
+        if (currentUser.user != project.user) {
+            return true
+        }
+        return false
+        
     }
 }
 

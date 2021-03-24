@@ -9,22 +9,40 @@ import SwiftUI
 
 struct ProfilCreate: View {
     
-    @State var mail: String = ""
+    // On récupère le Managed Object Contexte pour le donner à la sheet
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
+    @State var email: String = ""
     @State var password: String = ""
     @State var lastname: String = ""
     @State var firstname: String = ""
     
-    
-    init(){
-        UINavigationBar.appearance().shadowImage = UIImage()
-        UINavigationBar.appearance().barTintColor = .clear
-        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
-        UINavigationBar.appearance().largeTitleTextAttributes =
-            [.foregroundColor: UIColor.white]
-    }
-    
+    @Binding var showProfilCreate:Bool
+    @State var showingAlert = false
+
+
     var body: some View {
-        NavigationView{
+        
+        // Permet de supprimer la couleur du background par defaut
+        UITableView.appearance().backgroundColor = .clear
+        
+        // Met un background color
+        UINavigationBar.appearance().backgroundColor = UIColor(Color("bgGreen"))
+        
+        // Couleur et fontWeight du titre de la NavBar
+        let attrs = [
+            NSAttributedString.Key.foregroundColor: UIColor(Color.white),
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.bold)
+        ]
+        UINavigationBar.appearance().titleTextAttributes = attrs
+        
+        // Couleur de la navBarItems
+        UINavigationBar.appearance().tintColor = .white
+        
+        // Couleur du background de la navBar
+        UINavigationBar.appearance().barTintColor = UIColor(Color("bgGreen"))
+        
+        return NavigationView{
             
             ZStack{
                 Color("bgGreen")
@@ -38,26 +56,64 @@ struct ProfilCreate: View {
                             TextField("Prénom", text: $firstname)
                         }
                         Section{
-                            TextField("Émail", text: $mail)
+                            TextField("Email", text: $email)
                         }
-                        Section{
-                            TextField("Mot de Passe", text: $password)
-                        }
+//                        Section{
+//                            TextField("Mot de Passe", text: $password)
+//                        }
                     }
-                }.onAppear{
-                    UITableView.appearance().backgroundColor = .clear
-                        
+                    .disableAutocorrection(true)
                 }
                 .navigationBarTitle("Créer un compte" , displayMode: .inline)
-
-                .navigationBarItems(leading: Button("Cancel"){}, trailing:  Button("Créer"){})
+                .navigationBarItems(leading: cancelButton, trailing: addButton)
             }
         }
     }
+}
+
+extension ProfilCreate {
     
-    struct ProfilCreate_Previews: PreviewProvider {
-        static var previews: some View {
-            ProfilCreate()
+    private var cancelButton: some View {
+        Button("Annuler") {
+            showProfilCreate = false
+        }
+    }
+    
+    private var addButton: some View {
+        Button("Créer") {
+            
+            if (firstname == "" || lastname == "" || email == "") {
+                showingAlert = true
+            }
+            else {
+                // On sauvegarde les données
+                saveFirstUser()
+                
+                self.showingAlert = false
+                self.showProfilCreate = false
+            }
+        }
+        .alert(isPresented: $showingAlert) {
+            Alert(title: Text("Attention"), message: Text("Vous devez remplir tous les champs"), dismissButton: .default(Text("OK")))
+        }
+    }
+}
+
+extension ProfilCreate {
+    
+    func saveFirstUser() {
+        // On crée une nouvelle instance Projet
+        let newUser = User(context: managedObjectContext)
+        
+        newUser.firstname = firstname
+        newUser.lastname = lastname
+        newUser.email = email
+        
+        // On save la nouvelle instance dans le MOC
+        do {
+            try managedObjectContext.save()
+        } catch {
+            print(error)
         }
     }
 }

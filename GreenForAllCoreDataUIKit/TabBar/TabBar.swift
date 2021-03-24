@@ -17,7 +17,7 @@ import SwiftUI
 var tabItems = ["Project", "Guide","Market","Profil"]
 
 struct TabBar: View {
-    @State var selected = "guide"
+    @State var selected = "Project"
     
     init() {
         UITabBar.appearance().isHidden = true

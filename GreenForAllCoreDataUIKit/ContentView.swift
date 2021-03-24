@@ -8,8 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    // Je récupère le current user depuis l'environement
+    @EnvironmentObject var currentUser: CurrentUser
+    
     var body: some View {
-        TabBar()
+        // S'il a déjà compte
+        if (currentUser.user != nil) {
+            TabBar()
+        } else {
+            ProfilConnexion()
+        }
     }
 }
 
