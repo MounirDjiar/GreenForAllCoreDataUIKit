@@ -36,14 +36,18 @@ struct ProjectRow: View {
                 
                 Spacer()
                
-                HStack {
-                    Image(systemName: "person.fill")
-                    Text("10")
-                        .fontWeight(.bold)
-                        .padding(.leading, -10.0)
+                HStack(alignment: .top) {
+                    HStack(alignment: .top) {
+                        Image(systemName: "person.fill")
+                            .font(.system(size: 18))
+                        Text("\(project.nbContributeurs)")
+                            .fontWeight(.bold)
+                            .font(.system(size: 18))
+                            .padding(.leading, -8.0)
+                    }
                     Spacer()
                     Image(systemName: "clock.arrow.circlepath")
-                    Text("6J")
+                    Text("\(project.nbDaysLeftToProject)")
                         .fontWeight(.bold)
                         .padding(.leading, -9.0)
                     Spacer()
@@ -80,8 +84,24 @@ struct ProjectRow_Previews: PreviewProvider {
         // On lui assigne des valeurs
         project1.title = "Projet 1"
         project1.budget = 12000
-        project1.picture = "icon_project1"
+        project1.picture = "Icon_project2"
         project1.category = CategoryProject.energie.rawValue
+        project1.created_date = Date()
+        project1.finished_date = Date().addingTimeInterval(TimeInterval(86400 * 6)) // Exemple 6J
+
+        
+        project1.category = CategoryProject.energie.rawValue
+        
+        // Je crée une contribution
+        let contribution1 = Contribution(context: context)
+        contribution1.amount = 1000
+        
+        // Je crée une contribution
+        let contribution2 = Contribution(context: context)
+        contribution2.amount = 2000
+        
+        project1.addToContributions(contribution1)
+        project1.addToContributions(contribution2)
         
         return ProjectRow(project: project1)
     }

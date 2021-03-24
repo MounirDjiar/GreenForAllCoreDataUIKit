@@ -12,6 +12,9 @@ struct ContributionView: View {
     // On récupère le Managed Object Contexte
     @Environment(\.managedObjectContext) var managedObjectContext
     
+    // Je récupère le current user depuis l'environement
+    @EnvironmentObject var currentUser: CurrentUser
+    
     @Binding var showContributionView:Bool
     @State var amount:String = ""
     
@@ -95,9 +98,12 @@ extension ContributionView {
             let newContribution = Contribution(context: managedObjectContext)
             newContribution.amount = Int64(montant)
             project.addToContributions(newContribution)
+            newContribution.user = currentUser.user
             
             // On save la nouvelle instance dans le MOC
             do {
+                print(montant)
+                
                 try managedObjectContext.save()
             } catch {
                 print(error)
