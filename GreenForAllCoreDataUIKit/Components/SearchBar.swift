@@ -23,7 +23,7 @@ struct SearchBar: View {
                 .overlay(
                     HStack {
                         Image(systemName: "magnifyingglass")
-                            .foregroundColor(Color(.systemGray4))
+                            .foregroundColor(Color("bgGreen"))
                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                             .padding(.leading, 8)
                         
@@ -37,8 +37,8 @@ struct SearchBar: View {
                     self.isEditing = (searchText != "")
                 })
         }
-        .background(Color.white.opacity(0.9))
-        .cornerRadius(5.0)
+        .background(Color.white.opacity(0.7))
+        .cornerRadius(9.0)
         .padding(.horizontal) 
     }
 }
@@ -51,7 +51,7 @@ extension SearchBar {
             self.searchText = ""
         }) {
             Image(systemName: "multiply.circle.fill")
-                .foregroundColor(Color(.systemGray4))
+                .foregroundColor(Color(.systemGray2))
                 .padding(8)
         }
     }
