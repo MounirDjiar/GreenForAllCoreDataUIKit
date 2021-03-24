@@ -40,8 +40,4 @@ struct StocksDaily : Codable {
     }
  */
 }
-/*
-let aaa = StockPrice(open: "1", close: "2", high: "3", low: "4", volume: "5")
-let bbb = StockPrice(open: "11", close: "22", high: "33", low: "44", volume: "55")
-let cc = StocksDaily(timeSeriesDaily: ["2021-03-23": aaa, "2021-3-22": bbb])
-*/
+

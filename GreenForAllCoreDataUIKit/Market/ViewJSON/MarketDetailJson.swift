@@ -8,29 +8,7 @@
 import SwiftUI
 
 struct MarketDetailJson: View {
-    /*
-    @ObservedObject var stockGRNB = StockData(stockSymbol: "GRNB")
-    @ObservedObject var stockMGGAX = StockData(stockSymbol: "MGGAX")
-    @ObservedObject var stockCGAFX = StockData(stockSymbol: "CGAFX")
-    @ObservedObject var stockBGRN = StockData(stockSymbol: "BGRN")
-    @ObservedObject var stockIQQHDE = StockData(stockSymbol: "IQQH.DE")
-    @ObservedObject var stockQCLN = StockData(stockSymbol: "QCLN")
-    @ObservedObject var stockPBW =  StockData(stockSymbol: "PBW")
-    @ObservedObject var stockAAPL = StockData(stockSymbol: "AAPL")
-    @ObservedObject var stockIBM = StockData(stockSymbol: "IBM")
-    @ObservedObject var stockMSFT = StockData(stockSymbol: "MSFT")
-    *//*
-    @EnvironmentObject var stockGRNB: StockData
-    @EnvironmentObject var stockMGGAX: StockData
-    @EnvironmentObject var stockCGAFX: StockData
-    @EnvironmentObject var stockBGRN: StockData
-    @EnvironmentObject var stockIQQHDE: StockData
-    @EnvironmentObject var stockQCLN: StockData
-    @EnvironmentObject var stockPBW: StockData
-    @EnvironmentObject var stockAAPL: StockData
-    @EnvironmentObject var stockIBM: StockData
-    @EnvironmentObject var stockMSFT: StockData
-    */
+    
     @ObservedObject var stockGRNB: StockData
     @ObservedObject var stockMGGAX: StockData
     @ObservedObject var stockCGAFX: StockData
@@ -134,24 +112,7 @@ struct MarketDetailJson_Previews: PreviewProvider {
 }
 
 extension MarketDetailJson {
-/*    private var change : some View {
-        
-        let open = Double(stocks.open)
-        let close = Double(stocks.close) ?? 0
-        let priceChange = open ?? 0 - close
-        let percentChange = priceChange / (open ?? 0) * 100
-    let colorChange = priceChange > 0 ? Color.green : Color.red
-        
-    return
-            
-    HStack {
-        Spacer()
-        Text("\(priceChange, specifier: "%.2f")").font(.title2).padding(/*@START_MENU_TOKEN@*/.horizontal/*@END_MENU_TOKEN@*/).background(colorChange)
-        Spacer()
-        Text("(\(percentChange, specifier: "%.2f")%)").font(.title2).padding(.horizontal).background(colorChange)
-    }
-    }
-*/
+
     private var change: some View {
         let open = Double(assign(item: assetInfo.symbol).open) ?? 0.0 //Double(stockAAPL.open) ?? 0
         let currentPrice = Double(assign(item: assetInfo.symbol).currentPrice) ?? 0.0 //Double(stockAAPL.open) ?? 0

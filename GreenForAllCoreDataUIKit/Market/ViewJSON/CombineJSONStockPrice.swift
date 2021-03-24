@@ -36,23 +36,7 @@ class StockData : ObservableObject {
     }
     
     func fetchStockPrice(){
-        /*
-        let urlBase =
-            "http://localhost:8888/test/green4all/IBMStockData.json"
-            //"http://www.vinsfinsmotohama.shop/test/green4all/IBMStockData.json" //"https://www.alphavantage.co/query?function=\(stockFunction)&symbol=\(stockSymbol)&apikey=\(apiKey)&datatype=json" //"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=AAPL&apikey=2OZPW2NW0AT07VNL&datatype=json"
-        
-        */
-        /*
-        URLSession.shared.dataTaskPublisher(for: URL(string: "\(urlBase)")!)
-            .map{output in
-                
-                return output.data
-        }
-        .decode(type: StocksDaily.self, decoder: JSONDecoder())
-        .sink(receiveCompletion: {_ in
-            print("completed")
-        }, receiveValue: { value in
-        */
+
             var stockPrices = [Double]()
         
         let lastRefreshed = "2021-03-22"

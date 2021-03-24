@@ -8,23 +8,7 @@
 import SwiftUI
 
 struct MarketListJson: View {
-    
-    /* to load .json file
-    let IBMstockData = Bundle.main.decode("IBM2021-03-22.json")
-    let lastRefreshed = "2021-03-22"
-    */
-    /*
-    @ObservedObject var stockGRNB = StockData(stockSymbol: "GRNB")
-    @ObservedObject var stockMGGAX = StockData(stockSymbol: "MGGAX")
-    @ObservedObject var stockCGAFX = StockData(stockSymbol: "CGAFX")
-    @ObservedObject var stockBGRN = StockData(stockSymbol: "BGRN")
-    @ObservedObject var stockIQQHDE = StockData(stockSymbol: "IQQH.DE")
-    @ObservedObject var stockQCLN = StockData(stockSymbol: "QCLN")
-    @ObservedObject var stockPBW =  StockData(stockSymbol: "PBW")
-    @ObservedObject var stockAAPL = StockData(stockSymbol: "AAPL")
-    @ObservedObject var stockIBM = StockData(stockSymbol: "IBM")
-    @ObservedObject var stockMSFT = StockData(stockSymbol: "MSFT")
-    */
+
     @StateObject var stockGRNB = StockData(stockSymbol: "GRNB")
     @StateObject var stockMGGAX = StockData(stockSymbol: "MGGAX")
     @StateObject var stockCGAFX = StockData(stockSymbol: "CGAFX")
@@ -105,13 +89,12 @@ struct MarketListJson: View {
                         
                         //ForEach(modelData.assetInfos) { element in
                     //ForEach(filteredItem) { element in
-                        NavigationLink( destination: //MarketAssetDataDetailView(item: element, stocks: assign(item: element.symbol)),
+                        NavigationLink( destination:
                             MarketDetailJson(stockGRNB: stockGRNB, stockMGGAX: stockMGGAX, stockCGAFX: stockCGAFX, stockBGRN: stockBGRN, stockIQQHDE: stockIQQHDE, stockQCLN: stockQCLN, stockPBW: stockPBW, stockAAPL: stockAAPL, stockIBM: stockIBM, stockMSFT: stockMSFT,  assetInfo: element),
-                            //MarketDetail(assetInfo: searchedItem[index]),
+                            
                         label: {
-                            //Text(element.symbol)
+                            
                             AssetDataRow(element:  element)
-                            //AssetDataRow(element:  searchedItem[index])
                                 .background(colorTranparent)//(index  % 2 == 0) ? colorTranparent : colorTranparentMedium)//.listRowBackground((index  % 2 == 0) ? Color(.systemBlue) : Color(.red))
                             
                         })//.listRowBackground((index  % 2 == 0) ? Color(.systemBlue) : Color(.red))
@@ -124,18 +107,7 @@ struct MarketListJson: View {
         .foregroundColor(.white)
 
         }
-        /*
-        .environmentObject(stockGRNB)
-        .environmentObject(stockMGGAX)
-        .environmentObject(stockCGAFX)
-        .environmentObject(stockBGRN)
-        .environmentObject(stockIQQHDE)
-        .environmentObject(stockQCLN)
-        .environmentObject(stockPBW)
-        .environmentObject(stockAAPL)
-        .environmentObject(stockIBM)
-        .environmentObject(stockMSFT)
-         */
+        
         .environmentObject(modelData)
     }
 }
@@ -154,7 +126,7 @@ extension MarketListJson {
         //let myStock = stock(item: element.symbol)
         
         return
-            
+         
             HStack{
             VStack(alignment: .leading) {
                 Text(element.symbol).font(.title2).fontWeight(.bold)
@@ -188,6 +160,7 @@ extension MarketListJson {
 
             Text(">")
             //Image(systemName: "arrowtriangle.right")
+
         }.padding(.all, 5.0)
             
     }
