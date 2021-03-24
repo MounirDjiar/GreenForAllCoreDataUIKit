@@ -118,12 +118,7 @@ struct CreateProjectView: View {
                                 HStack {
                                     ForEach (CategoryProject.allCases, id: \.self) { categoryProject in
                                         Button(action: {
-                                            if (selectedCategory == categoryProject){
-                                                //selectedCategory = CategoryProject.none
-                                            }
-                                            else{
-                                                selectedCategory = categoryProject
-                                            }
+                                           selectedCategory = categoryProject
                                         }, label: {
                                             if (selectedCategory == categoryProject)
                                             {
@@ -132,6 +127,17 @@ struct CreateProjectView: View {
                                                     .frame(width: 100, height: 100)
                                                     .cornerRadius(5)
                                                     .border(Color.green, width: 5)
+                                                    .overlay(
+                                                        VStack {
+                                                            Spacer()
+                                                            Text(categoryProject.categoryProjectTitle)
+                                                                .fontWeight(.heavy)
+                                                                .foregroundColor(Color.white)
+                                                            Text("")
+                                                                .frame(height: 2)
+                                                            
+                                                        }
+                                                    )
                                             }
                                             else
                                             {
@@ -195,13 +201,16 @@ struct CreateProjectView: View {
                                 }
                             }, label: {
                                 HStack {
-                                    Text("Selectionnez une image")
-                                    Spacer()
-                                    (image ?? Image(systemName: "person"))
+                                    (image ?? Image(systemName: "photo"))
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: 40, height: 40)
+                                    Spacer()
+                                    Text("Selectionnez une image")
+                                        
+                                    Spacer()
                                 }
+                                .foregroundColor(Color("bgGreen"))
                             })
                         }
                     }

@@ -81,6 +81,7 @@ extension ProjectListView {
         }, label: {
             Image(systemName: "plus")
                 .foregroundColor(.white)
+                .font(.system(size: 25))
         })
     }
     

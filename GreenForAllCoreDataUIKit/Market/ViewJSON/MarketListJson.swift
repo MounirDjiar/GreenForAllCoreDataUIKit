@@ -75,7 +75,9 @@ struct MarketListJson: View {
                 // SearchBar
                 SearchBar(searchText: $searchText)
                 
-                Text(now, style: .date).padding()
+                Text(now, style: .date)
+                    .padding()
+                    .environment(\.locale, Locale(identifier: "fr"))
                 
                 Toggle(isOn: $showFavoritesOnly) {
                     //Text("Favorites only")
@@ -117,7 +119,7 @@ struct MarketListJson: View {
 struct MarketListJson_Previews: PreviewProvider {
     static var previews: some View {
         MarketListJson().environmentObject(ModelData()).environmentObject(StockData(stockSymbol: ""))
-        
+            .environment(\.locale, Locale(identifier: "fr"))
     }
 }
 
