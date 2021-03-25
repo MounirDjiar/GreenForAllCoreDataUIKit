@@ -21,6 +21,12 @@ struct CategorySegmentedControl: View {
                 }
                 .pickerStyle(SegmentedPickerStyle())
             }
+            .onAppear {
+                UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.init(Color("greenSearchBar"))], for: .selected)
+                UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.init(Color("greenSearchBar"))], for: .normal)
+            }
+            .background(Color.white.opacity(0.7))
+            .cornerRadius(7)
             .padding(.horizontal)
         }
     }

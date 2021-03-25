@@ -125,6 +125,7 @@ struct ProjectRow_Previews: PreviewProvider {
         project1.addToContributions(contribution2)
         
         return ProjectRow(project: project1)
+        
     }
 }
 

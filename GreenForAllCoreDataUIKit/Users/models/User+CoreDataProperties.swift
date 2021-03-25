@@ -60,6 +60,10 @@ extension User {
 
 }
 
+extension User {
+
+}
+
 extension User : Identifiable {
 
 }

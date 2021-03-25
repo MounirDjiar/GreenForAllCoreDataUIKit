@@ -97,7 +97,7 @@ struct TabBarButton: View {
                     .renderingMode(.template)
                     .frame(width: 35, height: 35)
                     .foregroundColor(selected == value ? Color("bgGreen") : .gray)
-                
+                    .padding(.top, 20)
                 Text(value)
                     .font(.caption)
                     .foregroundColor(Color("bgGreen"))
@@ -133,7 +133,7 @@ struct AnimatedShape: Shape {
             
             // curve ...
             path.move(to: CGPoint(x: centerX - 35, y: 15))
-            path.addQuadCurve(to: CGPoint(x: centerX + 35, y: 15), control: CGPoint(x: centerX, y: -30))
+            path.addQuadCurve(to: CGPoint(x: centerX + 35, y: 15), control: CGPoint(x: centerX, y: -20))
         }
     }
 }
