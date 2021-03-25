@@ -9,20 +9,12 @@ import SwiftUI
 
 struct ProfilView: View {
     
+    // On récupère le Managed Object Contexte pour le donner à la sheet
+    @Environment(\.managedObjectContext) var managedObjectContext
+    
     // On récupère tous les projet
     @FetchRequest(fetchRequest: Project.fetchRequest()) var projects:FetchedResults<Project>
     
-//    @FetchRequest(
-//        entity: Project.entity(),
-//        sortDescriptors: [],
-//        predicate: NSPredicate(format: "title == 'Project 2'")
-//    ) var projects: FetchedResults<Project>
-//
-//
-//
-//
-//
-//
     var body: some View {
         
         // Permet de supprimer la couleur du background par defaut
@@ -52,8 +44,7 @@ struct ProfilView: View {
                 VStack(alignment: .leading){
                     
                     ProfilPresentation()
-                    
-                    
+                
                     VStack(alignment: .leading) {
                         Section(
                             header: Text("Mes projets")
@@ -61,13 +52,21 @@ struct ProfilView: View {
                                 .font(.title3)
                                 .foregroundColor(.white)
                         ) {
-                            TabView {
-                                ForEach (projects) { project in
-                                    ProjectRow(project: project)
+                            if (!projects.isEmpty) {
+                                TabView {
+                                    ForEach (projects) { project in
+                                        ProjectRow(project: project)
+                                    }
                                 }
+                                .tabViewStyle(PageTabViewStyle())
+                                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
+                            } else {
+                                HStack {
+                                    Text("Vous n'avez aucun projet")
+                                        .foregroundColor(.white)
+                                }
+                                Spacer()
                             }
-                            .tabViewStyle(PageTabViewStyle())
-                            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
                         }
                     }
                     
@@ -78,13 +77,22 @@ struct ProfilView: View {
                                 .font(.title3)
                                 .foregroundColor(.white)
                         ) {
-                            TabView {
-                                ForEach (projects) { project in
-                                    ProjectRow(project: project)
+                            if (!projects.isEmpty) {
+                                TabView {
+                                    ForEach (projects) { project in
+                                        ProjectRow(project: project)
+                                        
+                                    }
                                 }
+                                .tabViewStyle(PageTabViewStyle())
+                                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
+                            } else {
+                                HStack {
+                                    Text("Vous n'avez aucune contribution")
+                                        .foregroundColor(.white)
+                                }
+                                Spacer()
                             }
-                            .tabViewStyle(PageTabViewStyle())
-                            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
                         }
                     }
                     
