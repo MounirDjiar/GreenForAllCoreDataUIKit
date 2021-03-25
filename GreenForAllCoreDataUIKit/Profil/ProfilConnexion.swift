@@ -91,6 +91,9 @@ struct ProfilConnexion: View {
             })
         } else {
             TabBar()
+                .environment(\.managedObjectContext, managedObjectContext)
+                // Je le rajoute à l'environement
+                .environmentObject(CurrentUser(context: managedObjectContext))
         }
     }}
 

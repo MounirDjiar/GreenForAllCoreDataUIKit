@@ -23,7 +23,7 @@ class CurrentUser: ObservableObject {
     func getUser () {
         
         let request = NSFetchRequest<User>(entityName: "User")
-        request.fetchLimit = 1
+       // request.fetchLimit = 1
         
         if let result = try? context.fetch(request) {
             user = (result as [User]).last

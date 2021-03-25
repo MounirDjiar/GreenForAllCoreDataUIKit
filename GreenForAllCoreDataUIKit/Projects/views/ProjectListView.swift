@@ -111,9 +111,9 @@ extension ProjectListView {
         // On crée une nouvelle instance Projet
         let newUser = User(context: managedObjectContext)
         
-        newUser.firstname = "Batiste"
-        newUser.lastname = "Mounlin"
-        newUser.email = "batiste@moulin.fr"
+        newUser.firstname = "Bachir"
+        newUser.lastname = "SAHALI"
+        newUser.email = "Bachir@gmail.fr"
         
         // On save la nouvelle instance dans le MOC
         do {

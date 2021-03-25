@@ -86,6 +86,7 @@ struct ProfilView: View {
                                 Spacer()
                             }
                         }
+                        .listRowBackground(Color("bgGreen"))
                         
                         Section(
                             header: Text("Mes contributions")

@@ -96,7 +96,7 @@ struct MarketDetailJson: View {
         
     }
     .background(Color.green)
-    .edgesIgnoringSafeArea(.all)
+    //.edgesIgnoringSafeArea(.all)
     .foregroundColor(.white)
     
     }
