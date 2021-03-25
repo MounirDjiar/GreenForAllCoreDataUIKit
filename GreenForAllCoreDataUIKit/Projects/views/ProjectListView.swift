@@ -94,7 +94,7 @@ extension ProjectListView {
                     (searchText.isEmpty || $0.title.localizedStandardContains(searchText))
                         && ($0.category == selectedCategory.rawValue)
                 }
-            ) { project in
+            , id: \.self) { project in
                 NavigationLink(
                     destination: ProjectDetailView(project: project),
                     label: {
@@ -102,6 +102,7 @@ extension ProjectListView {
                     })
                     .environment(\.managedObjectContext, managedObjectContext)
             }//: ForEach
+            //.onDelete(perform: remove)
         }//:ScrollView
     }
 }
@@ -121,6 +122,18 @@ extension ProjectListView {
             try managedObjectContext.save()
         } catch {
             print(error)
+        }
+    }
+    
+    func remove(at offsets: IndexSet) {
+        for index in offsets {
+                let project = projects[index]
+                managedObjectContext.delete(project)
+            }
+        do {
+            try managedObjectContext.save()
+        } catch {
+            // handle the Core Data error
         }
     }
 }
