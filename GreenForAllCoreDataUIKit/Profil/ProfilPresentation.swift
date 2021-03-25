@@ -10,7 +10,7 @@ import SwiftUI
 struct ProfilPresentation: View {
     
     // On récupère le Managed Object Contexte pour le donner à la sheet
-    @Environment(\.managedObjectContext) var context
+    //@Environment(\.managedObjectContext) var context
     
     // Je récupère le current user depuis l'environement
     @EnvironmentObject var currentUser: CurrentUser

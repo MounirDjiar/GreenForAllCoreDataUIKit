@@ -19,6 +19,9 @@ var tabItems = ["Project", "Guide","Market","Profil"]
 struct TabBar: View {
     @State var selected = "Project"
     
+    // Je récupère le current user depuis l'environement
+    @EnvironmentObject var currentUser: CurrentUser
+    
     init() {
         UITabBar.appearance().isHidden = true
         UITableView.appearance().backgroundColor = .green // Uses UIColor
@@ -40,7 +43,7 @@ struct TabBar: View {
                 MarketListJson()
                     .tag(tabItems[2])
                 
-                ProfilView()
+                ProfilView(currentUser: currentUser)
                     .tag(tabItems[3])
             }
             

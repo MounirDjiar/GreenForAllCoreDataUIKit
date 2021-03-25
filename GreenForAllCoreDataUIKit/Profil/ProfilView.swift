@@ -12,8 +12,26 @@ struct ProfilView: View {
     // On récupère le Managed Object Contexte pour le donner à la sheet
     @Environment(\.managedObjectContext) var managedObjectContext
     
-    // On récupère tous les projet
-    @FetchRequest(fetchRequest: Project.fetchRequest()) var projects:FetchedResults<Project>
+    // Je récupère le current user depuis l'environement
+    @EnvironmentObject var currentUser: CurrentUser
+    
+    var fetchRequestMyProjects: FetchRequest<Project>
+    var myProjects: FetchedResults<Project> {fetchRequestMyProjects.wrappedValue}
+    
+    var fetchRequestMyProjectsContributions: FetchRequest<Project>
+    var myContributions: FetchedResults<Project> {fetchRequestMyProjectsContributions.wrappedValue}
+    
+    init (currentUser: CurrentUser) {
+        
+        fetchRequestMyProjects = FetchRequest<Project>(entity: Project.entity(),
+        sortDescriptors: [],
+        predicate: NSPredicate(format: "user.firstname == '\(currentUser.user?.firstname ?? "")'"))
+        
+        
+        fetchRequestMyProjectsContributions = FetchRequest<Project>(entity: Project.entity(),
+                                                                    sortDescriptors: [],
+                                                                    predicate: NSPredicate(format: "ANY contributions.user.firstname == '\(currentUser.user?.firstname ?? "")'"))
+    }
     
     var body: some View {
         
@@ -52,9 +70,9 @@ struct ProfilView: View {
                                 .font(.title3)
                                 .foregroundColor(.white)
                         ) {
-                            if (!projects.isEmpty) {
+                            if (!myProjects.isEmpty) {
                                 TabView {
-                                    ForEach (projects) { project in
+                                    ForEach (myProjects) { project in
                                         ProjectRow(project: project)
                                     }
                                 }
@@ -77,9 +95,9 @@ struct ProfilView: View {
                                 .font(.title3)
                                 .foregroundColor(.white)
                         ) {
-                            if (!projects.isEmpty) {
+                            if (!myContributions.isEmpty) {
                                 TabView {
-                                    ForEach (projects) { project in
+                                    ForEach (myContributions) { project in
                                         ProjectRow(project: project)
                                         
                                     }
@@ -111,32 +129,33 @@ struct ProfilView: View {
     }
 }
 
-struct ProfilView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        
-        // On récupère le contexte
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
-        // On crée une instance de Project
-        let project1 = Project(context: context)
-        
-        // On lui assigne des valeurs
-        project1.title = "Projet 1"
-        project1.budget = 12000
-        project1.picture = "icon_project1"
-        project1.category = CategoryProject.energie.rawValue
-        project1.created_date = Date()
-        project1.description_project = "Description du projet"
-        
-        // Creation du User
-        let user1 = User(context: context)
-        user1.firstname = "Mounir"
-        user1.lastname = "DJIAR"
-        user1.email = "mounir@djiar.com"
-        project1.user = user1
-        
-        return ProfilView()
-            .environmentObject(CurrentUser(context: context))
-    }
-}
+//struct ProfilView_Previews: PreviewProvider {
+//    
+//    static var previews: some View {
+//        
+//        // On récupère le contexte
+//        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//        
+//        // On crée une instance de Project
+//        let project1 = Project(context: context)
+//        
+//        // On lui assigne des valeurs
+//        project1.title = "Projet 1"
+//        project1.budget = 12000
+//        project1.picture = "icon_project1"
+//        project1.category = CategoryProject.energie.rawValue
+//        project1.created_date = Date()
+//        project1.description_project = "Description du projet"
+//        
+//        // Creation du User
+//        let user1 = User(context: context)
+//        user1.firstname = "Mounir"
+//        user1.lastname = "DJIAR"
+//        user1.email = "mounir@djiar.com"
+//        project1.user = user1
+//        
+//        return ProfilView()
+//            //.environment(\.managedObjectContext, context)
+//            .environmentObject(CurrentUser(context: context))
+//    }
+//}
