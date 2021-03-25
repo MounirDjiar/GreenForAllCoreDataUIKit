@@ -16,6 +16,7 @@ struct ProfilConnexion: View {
     @State var mail: String = ""
     @State var password: String = ""
     @State var showProfilCreate:Bool = false
+    @State var connected:Bool = false
     
     
     init(){
@@ -27,7 +28,8 @@ struct ProfilConnexion: View {
     }
     
     var body: some View {
-                
+             
+        if (!connected) {
             ZStack {
                 Color("bgGreen")
                     .ignoresSafeArea()
@@ -55,16 +57,16 @@ struct ProfilConnexion: View {
 //                                .fontWeight(.bold)
 //                        })
                         
-                        NavigationLink(
-                            destination: ProjectListView(),
-                            label: {
-                                Text("Se Connecter")
-                                    .fontWeight(.bold)
-                            })
-                            .padding(.horizontal, 100)
-                            .padding()
-                            .background(Color("bgDarkGreen"))
-                            .cornerRadius(10)
+                        Button(action: {
+                            connected.toggle()
+                        }, label: {
+                            Text("Se Connecter")
+                                .fontWeight(.bold)
+                        })
+                        .padding(.horizontal, 100)
+                        .padding()
+                        .background(Color("bgDarkGreen"))
+                        .cornerRadius(10)
                         
                         Button(action: {
                            showProfilCreate = true
@@ -87,7 +89,9 @@ struct ProfilConnexion: View {
                 ProfilCreate(showProfilCreate: $showProfilCreate)
                     .environment(\.managedObjectContext, managedObjectContext)
             })
-        
+        } else {
+            TabBar()
+        }
     }}
 
 struct ProfilConnexion_Previews: PreviewProvider {

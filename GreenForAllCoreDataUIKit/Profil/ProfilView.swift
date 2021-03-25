@@ -24,8 +24,8 @@ struct ProfilView: View {
     init (currentUser: CurrentUser) {
         
         fetchRequestMyProjects = FetchRequest<Project>(entity: Project.entity(),
-        sortDescriptors: [],
-        predicate: NSPredicate(format: "user.firstname == '\(currentUser.user?.firstname ?? "")'"))
+                                                       sortDescriptors: [],
+                                                       predicate: NSPredicate(format: "user.firstname == '\(currentUser.user?.firstname ?? "")'"))
         
         
         fetchRequestMyProjectsContributions = FetchRequest<Project>(entity: Project.entity(),
@@ -62,8 +62,8 @@ struct ProfilView: View {
                 VStack(alignment: .leading){
                     
                     ProfilPresentation()
-                
-                    VStack(alignment: .leading) {
+                    
+                    List  {
                         Section(
                             header: Text("Mes projets")
                                 .fontWeight(.bold)
@@ -86,9 +86,7 @@ struct ProfilView: View {
                                 Spacer()
                             }
                         }
-                    }
-                    
-                    VStack(alignment: .leading) {
+                        
                         Section(
                             header: Text("Mes contributions")
                                 .fontWeight(.bold)
@@ -99,7 +97,6 @@ struct ProfilView: View {
                                 TabView {
                                     ForEach (myContributions) { project in
                                         ProjectRow(project: project)
-                                        
                                     }
                                 }
                                 .tabViewStyle(PageTabViewStyle())
@@ -112,7 +109,9 @@ struct ProfilView: View {
                                 Spacer()
                             }
                         }
+                        .listRowBackground(Color("bgGreen"))
                     }
+                    
                     
                     Spacer()
                     Spacer()
