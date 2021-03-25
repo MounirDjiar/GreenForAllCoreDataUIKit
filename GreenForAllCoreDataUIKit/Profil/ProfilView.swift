@@ -24,12 +24,12 @@ struct ProfilView: View {
     init (currentUser: CurrentUser) {
         
         fetchRequestMyProjects = FetchRequest<Project>(entity: Project.entity(),
-                                                       sortDescriptors: [],
+                                                       sortDescriptors: [NSSortDescriptor(key: "created_date", ascending: false)],
                                                        predicate: NSPredicate(format: "user.firstname == '\(currentUser.user?.firstname ?? "")'"))
         
         
         fetchRequestMyProjectsContributions = FetchRequest<Project>(entity: Project.entity(),
-                                                                    sortDescriptors: [],
+                                                                    sortDescriptors: [NSSortDescriptor(key: "created_date", ascending: false)],
                                                                     predicate: NSPredicate(format: "ANY contributions.user.firstname == '\(currentUser.user?.firstname ?? "")'"))
     }
     
@@ -74,6 +74,8 @@ struct ProfilView: View {
                                 TabView {
                                     ForEach (myProjects) { project in
                                         ProjectRow(project: project)
+                                            .padding(.horizontal, 5.0)
+                                            .padding(.bottom, 30.0)
                                     }
                                 }
                                 .tabViewStyle(PageTabViewStyle())
@@ -98,6 +100,8 @@ struct ProfilView: View {
                                 TabView {
                                     ForEach (myContributions) { project in
                                         ProjectRow(project: project)
+                                            .padding(.horizontal, 5.0)
+                                            .padding(.bottom, 30.0)
                                     }
                                 }
                                 .tabViewStyle(PageTabViewStyle())
@@ -112,7 +116,17 @@ struct ProfilView: View {
                         }
                         .listRowBackground(Color("bgGreen"))
                     }
+                    .frame(width: 400)
                     
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            currentUser.user = nil
+                        }, label: {
+                            Text("Deconnexion")
+                        })
+                        Spacer()
+                    }
                     
                     Spacer()
                     Spacer()

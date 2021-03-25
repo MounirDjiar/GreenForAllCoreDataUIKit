@@ -14,7 +14,7 @@ extension Project {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Project> {
         let request = NSFetchRequest<Project>(entityName: "Project")
-        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: false)]
+        request.sortDescriptors = [NSSortDescriptor(key: "created_date", ascending: false)]
         return request
     }
 

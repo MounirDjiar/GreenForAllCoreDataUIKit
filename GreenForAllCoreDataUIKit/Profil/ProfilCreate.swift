@@ -62,6 +62,7 @@ struct ProfilCreate: View {
 //                            TextField("Mot de Passe", text: $password)
 //                        }
                     }
+                    .foregroundColor(Color("bgDarkGreen"))
                     .disableAutocorrection(true)
                 }
                 .navigationBarTitle("Créer un compte" , displayMode: .inline)

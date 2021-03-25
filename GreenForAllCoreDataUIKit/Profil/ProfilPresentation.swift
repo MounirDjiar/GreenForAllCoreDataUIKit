@@ -17,13 +17,7 @@ struct ProfilPresentation: View {
     
     var body: some View {
         HStack(alignment: .top){
-            VStack {
-                Button(action: {
-                    currentUser.user = nil
-                }, label: {
-                    Text("Deconexion")
-                })
-            }
+          
             VStack {
                 Image("avatar")
                     .resizable()

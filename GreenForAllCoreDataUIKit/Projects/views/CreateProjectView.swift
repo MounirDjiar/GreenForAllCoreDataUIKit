@@ -219,6 +219,7 @@ struct CreateProjectView: View {
                     }
                     
                 }// :Form
+                .foregroundColor(Color("bgDarkGreen"))
                 .disableAutocorrection(true)
                 
             }//:ZStack
